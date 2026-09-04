@@ -1,6 +1,6 @@
 # Phase 1 spec: explainers site, Bloom filter first
 
-Status: draft v5.2, 404 dropped, 2026-09-04. Nothing here is built. Lines added in the audit are marked (v5).
+Status: draft v5.3, checks folder deferred, 2026-09-04. Nothing here is built. Lines added in the audit are marked (v5).
 
 Vocabulary used throughout: **explainer** is one concept's page (v1 has one: Bloom filter). **Playground** is the interactive part of an explainer, the strip of bulbs and its boxes. **Site** is the thing at the GitHub Pages URL that will eventually hold several explainers.
 
@@ -162,7 +162,9 @@ Phase 1 is done when all of the following hold on the live GitHub Pages URL:
 
 ## 10. Cut order when time runs out
 
-Decided (D25). Cut from the bottom of this list first:
+Decided (D25). Deferred before the build started, 2026-09-04: the `checks/` folders. The checks in section 7 are still run before each push; results are recorded in the commit message instead of files. Folder is rebuilt from those records if time allows.
+
+Cut from the bottom of this list first:
 
 1. The landing's typeahead and dropdown (part of R15). Fall back to a plain list of built names with the same three messages on submit. The not-yet and not-supported states are never cut; a dead end on the front door fails goal 2.
 2. Touch tap-to-highlight (D18). Reviewers on phones lose hover; everything else works.
