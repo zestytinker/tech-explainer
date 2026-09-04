@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tech explainer</title>
+<meta name="description" content="Build a tiny version of a hard tech idea, then break it.">
+<style>
+:root{--ink:#1a1a1a;--paper:#FFE566;--panel:#fff;--grey:#E9E9E9;--pink:#FF4D9D;--shadow:6px 6px 0 var(--ink)}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;color:var(--ink);font:17px/1.6 "Avenir Next","Segoe UI","Helvetica Neue",system-ui,sans-serif;max-width:920px;padding:28px 20px 60px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+h1{font-size:clamp(36px,7vw,64px);line-height:1.05;letter-spacing:-.01em;font-weight:700;margin:0 0 28px;max-width:11em}
+.search{position:relative;max-width:640px}
+input{width:100%;font-family:inherit;font-size:24px;font-weight:500;line-height:1.2;padding:16px 20px;border:4px solid var(--ink);background:var(--grey);box-shadow:var(--shadow)}
+input:focus{outline:none;background:#fff}
+input:focus-visible{outline:4px solid var(--pink);outline-offset:2px}
+input::placeholder{color:#666;font-weight:400}
+.drop{margin-top:14px;border:4px solid var(--ink);background:var(--grey);box-shadow:var(--shadow);display:none}
+.drop.show{display:block}
+.item{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:3px solid var(--ink);font-weight:600;font-size:20px;text-decoration:none;color:var(--ink);gap:12px}
+.item:last-child{border-bottom:0}
+a.item:hover,a.item:focus,.item.sel{background:var(--ink);color:#fff;outline:none}
+.item.plain{cursor:default;font-weight:500}
+.tag{font-size:13px;font-weight:600;border:3px solid var(--ink);padding:2px 8px;background:var(--pink);color:#fff;white-space:nowrap}
+.tag.off{background:var(--panel);color:var(--ink)}
+.hint{padding:12px 16px;font-weight:400;color:#333;background:#f5f5f5}
+.msg{padding:14px 16px;background:var(--panel)}
+.msg b{display:block;margin-bottom:6px}
+.msg a{display:inline-block;border:3px solid var(--ink);padding:3px 10px;text-decoration:none;font-weight:600;background:var(--paper);box-shadow:3px 3px 0 var(--ink);margin:4px 8px 0 0}
+.foot{margin-top:60px;font-size:14px}
+.foot a{color:var(--ink)}
+</style></head><body>
+<h1>What do you want to understand?</h1>
+<div class="search">
+  <input id="q" placeholder="try: bloom filter" autocomplete="off" spellcheck="false" aria-label="concept to look up" aria-autocomplete="list" aria-controls="drop">
+  <div class="drop" id="drop" role="listbox"></div>
+</div>
+<p class="foot">Every answer here is decided on your device against a fixed list of about 200 concepts. Nothing you type is sent anywhere. <a href="https://github.com/zestytinker/tech-explainer/blob/main/content/allowlist.py">How the list was made</a></p>
+<script>
+'use strict';
+const LIST=[{"name":"array","aliases":[],"path":null},{"name":"linked list","aliases":[],"path":null},{"name":"stack","aliases":[],"path":null},{"name":"queue","aliases":[],"path":null},{"name":"hash table","aliases":["hash map","hashmap","dictionary"],"path":null},{"name":"binary search tree","aliases":["bst"],"path":null},{"name":"b-tree","aliases":["btree","b tree"],"path":null},{"name":"heap","aliases":["priority queue"],"path":null},{"name":"trie","aliases":["prefix tree"],"path":null},{"name":"graph","aliases":[],"path":null},{"name":"bloom filter","aliases":["bloom filters"],"path":"bloom-filter/"},{"name":"cuckoo filter","aliases":[],"path":null},{"name":"skip list","aliases":[],"path":null},{"name":"red-black tree","aliases":["red black tree"],"path":null},{"name":"lsm tree","aliases":["log-structured merge tree","log structured merge tree"],"path":null},{"name":"merkle tree","aliases":["hash tree"],"path":null},{"name":"ring buffer","aliases":["circular buffer"],"path":null},{"name":"bitmap","aliases":["bit array","bitset"],"path":null},{"name":"hyperloglog","aliases":["hll"],"path":null},{"name":"count-min sketch","aliases":["count min sketch"],"path":null},{"name":"binary search","aliases":[],"path":null},{"name":"quicksort","aliases":["quick sort"],"path":null},{"name":"merge sort","aliases":["mergesort"],"path":null},{"name":"heapsort","aliases":["heap sort"],"path":null},{"name":"dijkstra's algorithm","aliases":["dijkstra","shortest path"],"path":null},{"name":"breadth-first search","aliases":["bfs","breadth first search"],"path":null},{"name":"depth-first search","aliases":["dfs","depth first search"],"path":null},{"name":"dynamic programming","aliases":[],"path":null},{"name":"big o notation","aliases":["big o","time complexity"],"path":null},{"name":"recursion","aliases":[],"path":null},{"name":"hash function","aliases":["hashing"],"path":null},{"name":"consistent hashing","aliases":[],"path":null},{"name":"pagerank","aliases":["page rank"],"path":null},{"name":"a* search","aliases":["a star","a*"],"path":null},{"name":"two's complement","aliases":["twos complement"],"path":null},{"name":"floating point","aliases":["ieee 754"],"path":null},{"name":"regular expression","aliases":["regex","regexp"],"path":null},{"name":"levenshtein distance","aliases":["edit distance"],"path":null},{"name":"run-length encoding","aliases":["rle"],"path":null},{"name":"huffman coding","aliases":["huffman"],"path":null},{"name":"lz77","aliases":["lempel-ziv"],"path":null},{"name":"crc","aliases":["cyclic redundancy check"],"path":null},{"name":"reed-solomon","aliases":["reed solomon","erasure coding"],"path":null},{"name":"fft","aliases":["fast fourier transform"],"path":null},{"name":"monte carlo method","aliases":["monte carlo"],"path":null},{"name":"tcp","aliases":["transmission control protocol"],"path":null},{"name":"udp","aliases":[],"path":null},{"name":"ip address","aliases":["ip"],"path":null},{"name":"dns","aliases":["domain name system"],"path":null},{"name":"http","aliases":["hypertext transfer protocol"],"path":null},{"name":"https","aliases":[],"path":null},{"name":"tls","aliases":["ssl"],"path":null},{"name":"websocket","aliases":["websockets"],"path":null},{"name":"cdn","aliases":["content delivery network"],"path":null},{"name":"load balancer","aliases":["load balancing"],"path":null},{"name":"nat","aliases":["network address translation"],"path":null},{"name":"bgp","aliases":[],"path":null},{"name":"osi model","aliases":["osi"],"path":null},{"name":"latency","aliases":[],"path":null},{"name":"bandwidth","aliases":[],"path":null},{"name":"packet switching","aliases":[],"path":null},{"name":"mtu","aliases":["maximum transmission unit"],"path":null},{"name":"three-way handshake","aliases":["tcp handshake"],"path":null},{"name":"quic","aliases":[],"path":null},{"name":"http/2","aliases":["http2"],"path":null},{"name":"sql","aliases":[],"path":null},{"name":"relational database","aliases":["rdbms"],"path":null},{"name":"nosql","aliases":[],"path":null},{"name":"acid","aliases":[],"path":null},{"name":"database index","aliases":["index"],"path":null},{"name":"database transaction","aliases":["transaction"],"path":null},{"name":"normalization","aliases":["database normalization"],"path":null},{"name":"sharding","aliases":["shard"],"path":null},{"name":"replication","aliases":["database replication"],"path":null},{"name":"write-ahead log","aliases":["wal","write ahead log"],"path":null},{"name":"mvcc","aliases":["multiversion concurrency control"],"path":null},{"name":"query optimizer","aliases":["query planner"],"path":null},{"name":"orm","aliases":["object-relational mapping"],"path":null},{"name":"key-value store","aliases":["key value store"],"path":null},{"name":"time series database","aliases":[],"path":null},{"name":"graph database","aliases":[],"path":null},{"name":"cap theorem","aliases":["cap"],"path":null},{"name":"eventual consistency","aliases":[],"path":null},{"name":"deadlock","aliases":[],"path":null},{"name":"connection pool","aliases":["connection pooling"],"path":null},{"name":"consensus","aliases":["consensus algorithm"],"path":null},{"name":"raft","aliases":[],"path":null},{"name":"paxos","aliases":[],"path":null},{"name":"leader election","aliases":[],"path":null},{"name":"vector clock","aliases":[],"path":null},{"name":"lamport timestamp","aliases":["logical clock"],"path":null},{"name":"two-phase commit","aliases":["2pc","two phase commit"],"path":null},{"name":"idempotency","aliases":["idempotent"],"path":null},{"name":"message queue","aliases":["queue"],"path":null},{"name":"publish-subscribe","aliases":["pubsub","pub/sub","pub sub"],"path":null},{"name":"microservices","aliases":["microservice"],"path":null},{"name":"service mesh","aliases":[],"path":null},{"name":"circuit breaker","aliases":[],"path":null},{"name":"rate limiting","aliases":["rate limiter","token bucket"],"path":null},{"name":"backpressure","aliases":[],"path":null},{"name":"gossip protocol","aliases":[],"path":null},{"name":"byzantine fault tolerance","aliases":["bft"],"path":null},{"name":"distributed hash table","aliases":["dht"],"path":null},{"name":"mapreduce","aliases":["map reduce"],"path":null},{"name":"crdt","aliases":["conflict-free replicated data type"],"path":null},{"name":"process","aliases":[],"path":null},{"name":"thread","aliases":["threads","multithreading"],"path":null},{"name":"virtual memory","aliases":[],"path":null},{"name":"paging","aliases":["page table"],"path":null},{"name":"cache","aliases":["caching","cpu cache"],"path":null},{"name":"lru cache","aliases":["lru","least recently used"],"path":null},{"name":"mutex","aliases":["lock"],"path":null},{"name":"semaphore","aliases":[],"path":null},{"name":"race condition","aliases":[],"path":null},{"name":"context switch","aliases":["context switching"],"path":null},{"name":"system call","aliases":["syscall"],"path":null},{"name":"file system","aliases":["filesystem"],"path":null},{"name":"garbage collection","aliases":["gc"],"path":null},{"name":"stack overflow","aliases":[],"path":null},{"name":"memory leak","aliases":[],"path":null},{"name":"pipeline","aliases":["cpu pipeline","instruction pipelining"],"path":null},{"name":"branch prediction","aliases":[],"path":null},{"name":"interrupt","aliases":[],"path":null},{"name":"scheduler","aliases":["scheduling"],"path":null},{"name":"container","aliases":["containers","docker"],"path":null},{"name":"virtual machine","aliases":["vm","hypervisor"],"path":null},{"name":"endianness","aliases":["big endian","little endian"],"path":null},{"name":"public key cryptography","aliases":["asymmetric encryption","public-key cryptography"],"path":null},{"name":"rsa","aliases":[],"path":null},{"name":"aes","aliases":["symmetric encryption"],"path":null},{"name":"sha-256","aliases":["sha256","sha"],"path":null},{"name":"digital signature","aliases":[],"path":null},{"name":"certificate authority","aliases":["ca","certificate"],"path":null},{"name":"diffie-hellman","aliases":["diffie hellman","key exchange"],"path":null},{"name":"password hashing","aliases":["bcrypt","salt"],"path":null},{"name":"oauth","aliases":["oauth2"],"path":null},{"name":"jwt","aliases":["json web token"],"path":null},{"name":"cors","aliases":[],"path":null},{"name":"xss","aliases":["cross-site scripting"],"path":null},{"name":"sql injection","aliases":[],"path":null},{"name":"csrf","aliases":["cross-site request forgery"],"path":null},{"name":"zero-knowledge proof","aliases":["zero knowledge proof","zkp"],"path":null},{"name":"hmac","aliases":[],"path":null},{"name":"man-in-the-middle","aliases":["mitm"],"path":null},{"name":"two-factor authentication","aliases":["2fa","mfa"],"path":null},{"name":"blockchain","aliases":[],"path":null},{"name":"proof of work","aliases":[],"path":null},{"name":"rest","aliases":["rest api","restful"],"path":null},{"name":"graphql","aliases":[],"path":null},{"name":"grpc","aliases":[],"path":null},{"name":"json","aliases":[],"path":null},{"name":"protobuf","aliases":["protocol buffers"],"path":null},{"name":"dom","aliases":["document object model"],"path":null},{"name":"event loop","aliases":[],"path":null},{"name":"promise","aliases":["async await","async"],"path":null},{"name":"virtual dom","aliases":[],"path":null},{"name":"server-side rendering","aliases":["ssr"],"path":null},{"name":"cookie","aliases":["cookies"],"path":null},{"name":"session","aliases":[],"path":null},{"name":"url","aliases":["uri"],"path":null},{"name":"base64","aliases":[],"path":null},{"name":"unicode","aliases":["utf-8","utf8"],"path":null},{"name":"compiler","aliases":[],"path":null},{"name":"interpreter","aliases":[],"path":null},{"name":"just-in-time compilation","aliases":["jit"],"path":null},{"name":"abstract syntax tree","aliases":["ast"],"path":null},{"name":"bytecode","aliases":[],"path":null},{"name":"type system","aliases":["static typing","type checking"],"path":null},{"name":"closure","aliases":[],"path":null},{"name":"immutability","aliases":["immutable"],"path":null},{"name":"dependency injection","aliases":[],"path":null},{"name":"pure function","aliases":[],"path":null},{"name":"unit test","aliases":["unit testing"],"path":null},{"name":"version control","aliases":["git"],"path":null},{"name":"continuous integration","aliases":["ci","ci/cd"],"path":null},{"name":"feature flag","aliases":["feature toggle"],"path":null},{"name":"semantic versioning","aliases":["semver"],"path":null},{"name":"neural network","aliases":["neural networks"],"path":null},{"name":"gradient descent","aliases":[],"path":null},{"name":"backpropagation","aliases":["backprop"],"path":null},{"name":"overfitting","aliases":[],"path":null},{"name":"transformer","aliases":["transformers"],"path":null},{"name":"attention","aliases":["attention mechanism","self-attention"],"path":null},{"name":"embedding","aliases":["embeddings","word embedding"],"path":null},{"name":"tokenization","aliases":["tokenizer","bpe","byte pair encoding"],"path":null},{"name":"large language model","aliases":["llm"],"path":null},{"name":"convolutional neural network","aliases":["cnn"],"path":null},{"name":"reinforcement learning","aliases":[],"path":null},{"name":"k-means","aliases":["kmeans","clustering"],"path":null},{"name":"decision tree","aliases":[],"path":null},{"name":"random forest","aliases":[],"path":null},{"name":"linear regression","aliases":[],"path":null},{"name":"logistic regression","aliases":[],"path":null},{"name":"cosine similarity","aliases":[],"path":null},{"name":"vector database","aliases":["vector search"],"path":null},{"name":"nearest neighbor search","aliases":["knn","k-nearest neighbors"],"path":null},{"name":"dropout","aliases":[],"path":null},{"name":"batch normalization","aliases":[],"path":null},{"name":"retrieval-augmented generation","aliases":["rag"],"path":null},{"name":"diffusion model","aliases":[],"path":null},{"name":"perceptron","aliases":[],"path":null},{"name":"bayes theorem","aliases":["bayes' theorem","bayesian"],"path":null},{"name":"entropy","aliases":["information entropy"],"path":null},{"name":"softmax","aliases":[],"path":null},{"name":"activation function","aliases":["relu","sigmoid"],"path":null},{"name":"loss function","aliases":[],"path":null},{"name":"cross-validation","aliases":[],"path":null}];   // [{name, aliases, path|null}]
+const norm=s=>{s=s.trim().toLowerCase().replace(/\s+/g,' ');return (s.length>4&&s.endsWith('s')&&!s.endsWith('ss'))?s.slice(0,-1):s;};
+const index=new Map();
+for(const c of LIST)for(const k of [c.name,...c.aliases])index.set(norm(k),c);
+const built=LIST.filter(c=>c.path);
+const q=document.getElementById('q'),drop=document.getElementById('drop');
+let items=[],sel=-1;
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function builtLinks(){return built.map(c=>'<a href="'+c.path+'">'+esc(c.name)+'</a>').join('');}
+function render(html){drop.innerHTML=html;drop.classList.add('show');items=[...drop.querySelectorAll('a.item')];sel=-1;}
+function hide(){drop.classList.remove('show');items=[];sel=-1;}
+function matches(s){
+  if(!s)return [];
+  const out=[];const seen=new Set();
+  for(const c of LIST){const keys=[c.name,...c.aliases];
+    if(keys.some(k=>norm(k).startsWith(s))||keys.some(k=>k.toLowerCase().includes(s))){if(!seen.has(c.name)){seen.add(c.name);out.push(c);}}}
+  out.sort((a,b)=>(b.path?1:0)-(a.path?1:0)||a.name.localeCompare(b.name));
+  return out.slice(0,8);
+}
+function onFocus(){
+  if(q.value.trim()){onInput();return;}
+  render(built.map(c=>'<a class="item" href="'+c.path+'">'+esc(c.name)+'<span class="tag">built</span></a>').join('')
+    +'<div class="hint">Or type to search about 200 concepts: hash table, merkle tree, consistent hashing, lru cache...</div>');
+}
+function onInput(){
+  const raw=q.value,s=norm(raw);
+  if(!s){onFocus();return;}
+  const exact=index.get(s);
+  if(exact&&exact.path){location.href=exact.path;return;}          // OQ-11: full match on a built name opens it
+  const m=matches(s);
+  if(m.length)render(m.map(c=>c.path?'<a class="item" href="'+c.path+'">'+esc(c.name)+'<span class="tag">built</span></a>'
+                                    :'<div class="item plain">'+esc(c.name)+'<span class="tag off">no explainer yet</span></div>').join(''));
+  else notSupported(raw);
+}
+function notYet(c){render('<div class="msg"><b>'+esc(c.name)+' is a real concept, but there is no explainer for it here yet.</b>Built so far: '+builtLinks()+'</div>');}
+function notSupported(raw){render('<div class="msg"><b>No explainer for "'+esc(raw.trim().slice(0,40))+'" here.</b>Built so far: '+builtLinks()+'</div>');}
+function submit(){
+  const s=norm(q.value);
+  if(!s){onFocus();return;}
+  if(sel>=0&&items[sel]){location.href=items[sel].href;return;}
+  const exact=index.get(s);
+  if(exact){exact.path?location.href=exact.path:notYet(exact);return;}
+  const m=matches(s);
+  if(m.length===1&&m[0].path){location.href=m[0].path;return;}
+  if(m.length===1){notYet(m[0]);return;}
+  if(m.length){render(drop.innerHTML);return;}   // keep the list, let them pick
+  notSupported(q.value);
+}
+q.addEventListener('focus',onFocus);
+q.addEventListener('input',onInput);
+q.addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'&&items.length){e.preventDefault();sel=(sel+1)%items.length;items.forEach((it,i)=>it.classList.toggle('sel',i===sel));}
+  else if(e.key==='ArrowUp'&&items.length){e.preventDefault();sel=(sel-1+items.length)%items.length;items.forEach((it,i)=>it.classList.toggle('sel',i===sel));}
+  else if(e.key==='Enter'){e.preventDefault();submit();}
+  else if(e.key==='Escape'){hide();}
+});
+document.addEventListener('click',e=>{if(!e.target.closest('.search'))hide();});
+</script>
+</body></html>
