@@ -37,6 +37,10 @@ sup{font-weight:600}
 .sources{margin-top:38px;border-top:4px solid var(--ink);padding-top:12px;font-size:15px}
 .sources ol{padding-left:22px}.sources li{margin:6px 0}
 
+
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 26px}
+.steps button{font-weight:600;padding:8px 14px;background:var(--panel)}
+.steps button.cur{background:var(--ink);color:var(--paper)}
 .page{display:none}.page.cur{display:block}
 .pager{display:flex;justify-content:space-between;align-items:center;margin-top:34px;border-top:4px solid var(--ink);padding-top:16px;gap:12px}
 .pager .where{font-weight:600;color:#333}
@@ -47,13 +51,15 @@ sup{font-weight:600}
 </style></head><body>
 <nav><a href="landing.html">Tech explainer</a></nav>
 <h1>Bloom<br>filter</h1>
+<div class="steps" id="steps"></div>
 
 <section class="page" id="problem">
-<div class="origin"><h2>The problem</h2>
+<div class="origin"><h2>Why</h2>
 <p>Imagine a signup form on a site with a hundred million users. You type a name, and before you lift your finger it says: taken. It did not search a hundred million names in that instant. That list lives on slow disks somewhere else. Something much smaller answered first, something that fits in memory and only knows how to say two things: definitely not, or might be. If it says definitely not, the name is yours. If it says might be, only then does the real list get asked.</p>
 <p>That small something is a Bloom filter. It stays small because it is allowed to be wrong, in one direction only. Build one in eight clicks, then catch it being wrong.</p></div>
 </section>
 <section class="page" id="playground">
+<h2>How</h2>
 <p class="lede">Add words, then ask about one you never added.</p>
 <div class="panel">
   <div class="row"><input placeholder="add a word" value=""><button class="primary">Add</button><button disabled>Seed 8 words</button><button class="secondary">Reset</button></div>
@@ -111,8 +117,11 @@ for(const w of Object.keys(B)){const c=document.createElement('span');c.classNam
  const off=()=>{strip.classList.remove('dim');bulbs.forEach(b=>b.classList.remove('hi'));};
  c.onmouseenter=on;c.onmouseleave=off;c.onfocus=on;c.onblur=off;c.onclick=()=>c.classList.toggle('pin');words.appendChild(c);}
 
-const pages=['problem','playground','origin','applications','further'],names=['The problem','Playground','Origin story','Real-world applications','Read further'];
+const pages=['problem','playground','origin','applications','further'],names=['Why','How','Origin story','Real-world applications','Read further'];
+const stepsEl=document.getElementById('steps');
+pages.forEach((p,j)=>{const b=document.createElement('button');b.textContent=(j+1)+'. '+names[j];b.onclick=()=>location.hash=p;stepsEl.appendChild(b);});
 function show(){let i=pages.indexOf(location.hash.slice(1));if(i<0)i=0;
+ [...stepsEl.children].forEach((b,j)=>b.classList.toggle('cur',j===i));
  pages.forEach((p,j)=>document.getElementById(p).classList.toggle('cur',j===i));
  document.getElementById('where').textContent=(i+1)+' of 5: '+names[i];
  document.getElementById('next').textContent=i===0?'Next: build it':'Next';

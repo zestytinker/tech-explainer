@@ -1,8 +1,8 @@
-# Bloom filter explainer: pages 1, 3, 4, 5 (page 2 is the playground)
+# Bloom filter explainer: pages 1, 3, 4, 5 (page 2, How, is the playground)
 
 Verified 2026-09-04. Each claim carries the source number from the footer and the sentence in the source that supports it. Page 4 claims are the ones that go stale; re-check them whenever the page is touched (R23).
 
-## Page 1: The problem (hook, no sources needed: hypothetical)
+## Page 1: Why (hook, no sources needed: hypothetical)
 
 Imagine a signup form on a site with a hundred million users. You type a name, and before you lift your finger it says: taken. It did not search a hundred million names in that instant. That list lives on slow disks somewhere else. Something much smaller answered first, something that fits in memory and only knows how to say two things: definitely not, or might be. If it says definitely not, the name is yours. If it says might be, only then does the real list get asked.
 

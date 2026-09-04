@@ -1,6 +1,6 @@
 # Phase 1 spec: explainers site, Bloom filter first
 
-Status: draft v6.1, hook page added, 2026-09-04. Nothing here is built. Lines added in the audit are marked (v5).
+Status: draft v6.2, step buttons, 2026-09-04. Nothing here is built. Lines added in the audit are marked (v5).
 
 Vocabulary used throughout: **explainer** is one concept's page (v1 has one: Bloom filter). **Playground** is the interactive part of an explainer, the strip of bulbs and its boxes. **Site** is the thing at the GitHub Pages URL that will eventually hold several explainers.
 
@@ -97,7 +97,8 @@ The cheapest form of "scalable" that fits in 2 hours is a file layout and a set 
 | D37 | Dropped 2026-09-04: no `404.html` in v1. A mistyped URL shows GitHub's default 404 | Dropped |
 | D38 | (v5) Repository: MIT for code, CC BY 4.0 for prose and the allowlist | Default (OQ-16) |
 | D39 | Repo `tech-explainer`, site title "Tech explainer". Explainer URL `<user>.github.io/tech-explainer/bloom-filter/` | Decided |
-| D40 | The explainer is five pages in a fixed order: 1 The problem (hook story), 2 Playground, 3 Origin story, 4 Real-world applications, 5 Read further. Prev and Next move between them; on page 1 the Next button reads "Next: build it". The playground page is complete on its own; the reviewer path (R13) is one click from page 1, then never leaves page 2. Revised 2026-09-04 from four pages | Decided |
+| D40 | The explainer is five pages in a fixed order: 1 Why (hook story), 2 How (playground), 3 Origin story, 4 Real-world applications, 5 Read further. Prev and Next move between them; on page 1 the Next button reads "Next: build it". The playground page is complete on its own; the reviewer path (R13) is one click from page 1, then never leaves page 2. Revised 2026-09-04 from four pages | Decided |
+| D45 | Five step buttons sit under the title on every page, labelled "1. Why", "2. How", "3. Origin story", "4. Real-world applications", "5. Read further". The current page is filled black. Each jumps to its page; Prev/Next at the bottom stay | Decided |
 | D44 | The hook story is a hypothetical (a signup form on an unnamed site), so it carries no factual claim and no source. Text is in `content/bloom-filter-pages.md` | Decided |
 | D41 | The five pages are sections of one `index.html`, switched by URL hash (`#problem`, `#playground`, `#origin`, `#applications`, `#further`). Every page is deep-linkable and Prev/Next are instant | Default (OQ-18) |
 | D42 | Page 3 content is final and sourced in `content/bloom-filter-pages.md` (Cassandra, RocksDB, Bigtable paper, Bitcoin Core PR #16152), verified 2026-09-04. Chrome Safe Browsing excluded, no primary source for a present-tense claim. R23 re-checks the four links on deploy day | Decided |
@@ -129,7 +130,7 @@ The check column is the deploy checklist. Run it top to bottom before every push
 | R18 | (v5) Both pages are keyboard operable and color is never the only channel (D34, D35) | Tab through the explainer with the mouse unplugged: seed, add, check, suggest, reset, every word chip. Enter submits. Focus ring visible. Grayscale the page (devtools rendering, or a screenshot desaturated): a query result is still readable from the ring and the verdict |
 | R19 | (v5) Input limits per D33 in both boxes, and an empty check does nothing | Add a 21-character word: refused with a note. Add "café" and an emoji word: accepted, 3 bulbs. Submit an empty check: nothing changes |
 | R20 | Dropped with D37 | |
-| R22 | Prev/Next move through the five pages in order; Prev is absent on page 1 and Next on page 5; page 1's Next reads "Next: build it"; the browser back button and a direct link to `#applications` both land on the right page | Click through 1 to 5 and back. Reload on `#origin` shows Origin story. Open `#further` in a fresh tab. Back button returns to the previous page, not out of the site |
+| R22 | Prev/Next move through the five pages in order; Prev is absent on page 1 and Next on page 5; page 1's Next reads "Next: build it"; the step buttons under the title mark the current page and jump on click; the browser back button and a direct link to `#applications` both land on the right page | Click through 1 to 5 and back. Reload on `#origin` shows Origin story. Open `#further` in a fresh tab. Back button returns to the previous page, not out of the site |
 | R23 | Every system named on page 3 links to that system's own documentation or the original paper, and the claim matches what that source says today | On deploy day, open each source and read the sentence that supports the claim. Record the URL and date in the commit message. A claim without a matching sentence is removed |
 | R21 | (v5) Reload resets state; nothing is stored | Seed, reload. Strip is dark. Devtools: Application tab shows no cookies, no local or session storage for the origin |
 
