@@ -1,6 +1,6 @@
 # Phase 1 spec: explainers site, Bloom filter first
 
-Status: v7.3, landing without typeahead, 2026-09-04. Build ran 22:46 to 23:03 by commit timestamps (about 17 minutes of wall clock after the go; content and sourcing were done ahead). Nothing cut from the cut order. Nothing here is built. Lines added in the audit are marked (v5).
+Status: v7.4, repeatable seeding, 2026-09-04. Build ran 22:46 to 23:03 by commit timestamps (about 17 minutes of wall clock after the go; content and sourcing were done ahead). Nothing cut from the cut order. Nothing here is built. Lines added in the audit are marked (v5).
 
 Vocabulary used throughout: **explainer** is one concept's page (v1 has one: Bloom filter). **Playground** is the interactive part of an explainer, the strip of bulbs and its boxes. **Site** is the thing at the GitHub Pages URL that will eventually hold several explainers.
 
@@ -61,7 +61,7 @@ The cheapest form of "scalable" that fits in 2 hours is a file layout and a set 
 | D1 | Concept: Bloom filter first. Site is structured for more (4b) | Decided |
 | D2 | Check = dev-only checklist run before deploy (section 7) | Decided |
 | D3 | The set is words the reader adds themselves | Decided |
-| D4 | Page loads empty, with one "seed 8 words" button | Decided |
+| D4 | Page loads empty with a seed button. Revised 2026-09-04: the button stays usable and adds the next batch of 8 on each click (3 batches, 24 words total), so nobody has to type to fill the filter. Label reads "Seed 8 words" then "Seed 8 more". Disabled only when every sample word is in or the cap is reached | Decided |
 | D5 | False positive is found by free trying, plus a "suggest a word" button the page knows will collide | Decided |
 | D6 | Filter shown as one strip of 24 bulbs, not a grid | Decided |
 | D7 | On query: bulbs only, colored by the word that lit them. No sentence, no numbers | Decided |
@@ -81,7 +81,7 @@ The cheapest form of "scalable" that fits in 2 hours is a file layout and a set 
 | D21 | Reversed 2026-09-04 by D40. Was: one origin paragraph only | Reversed |
 | D22 | I write the code, single `index.html` per explainer; you name the repo | Decided |
 | D23 | Strip wraps to two rows of 12 below 480 px | Decided |
-| D24 | I pick the 8 seed words, verified by script (R8). You can veto | Decided |
+| D24 | I pick the seed words, verified by script (R8). Three batches: cat dog fig sun map jar owl ink / key box pen cup leaf door star rope / moon fern coin bell nest kite salt wave. Collision candidates after each batch: 719, 2390, 3086, so suggest always has something | Decided |
 | D25 | Cut order in section 10 | Decided |
 | D26 | Site layout: landing at root, each explainer in its own folder | Decided |
 | D27 | Landing is a search box. Free text, resolved on the reader's device against an allowlist of about 200 tech concepts shipped in the page. Revised 2026-09-04: no typeahead and no dropdown. Nothing appears while typing. Enter resolves and shows one of two messages under the box, each offering the built explainer as a bulb-yellow button. A persistent line under the box always names the built explainer, so the page is never a dead end even before anyone types. Nothing is fetched | Decided |
@@ -116,7 +116,7 @@ The check column is the deploy checklist. Run it top to bottom before every push
 | ID | Requirement | Check (dev, before deploy) |
 |---|---|---|
 | R1 | Page loads with an empty strip of 24 dark bulbs, an empty word list, an add box, a query box, "seed 8 words", "suggest a word", and reset | Open `index.html` from disk with network off. All seven elements visible above the fold at 1280 wide and at 375 wide |
-| R2 | "Seed 8 words" adds a fixed list of 8 words in a fixed order. Repeat clicks do nothing | Click twice. Word list shows exactly 8. Bulb pattern matches the pattern recorded in `checks/seed-pattern.txt` |
+| R2 | Seeding adds the next fixed batch of 8 in a fixed order and never duplicates a word already present, whether it was seeded or typed | Click once: exactly 8, batch-1 pattern is bulbs 0,1,2,4,5,7,8,10,14,16,17,18,19,20,21. Click twice: 16 distinct. Three times: 24, button disabled. Type "key" first then seed: still no duplicate. Type 20 words then seed: stops at the cap of 24 |
 | R3 | Adding a word lights exactly 3 bulbs (fewer if two hashes agree) and appends the word to the list with a distinct color | Add "penguin" to the seeded set. Count newly lit bulbs, 1 to 3. Word appears in list |
 | R4 | Same word always gives the same bulbs, across reloads and browsers | Add "penguin" in Chrome, Firefox and Safari (or two of them). Bulb indices identical. Record them in `checks/hash-vectors.txt` |
 | R5 | Input is lowercased and trimmed; empty input and duplicates are refused with a quiet note | Add " Cat ", then "cat". Second is refused. List shows "cat" once. Empty submit does nothing |
@@ -148,7 +148,7 @@ Numbers behind D12, computed for 24 bulbs and 3 hashes from the standard occupan
 | 15 | ~85% | ~62% |
 | 24 | ~95% | ~87% |
 
-These are expectations over random hash placement, not guarantees for the specific seed list. R2's recorded pattern is the actual behavior.
+Seeding three times walks the reader down this table on purpose: 8 words leaves 15 of 24 bulbs lit, 16 leaves 22, and 24 lights all of them, at which point every check answers "might be". These are expectations over random hash placement, not guarantees for the specific seed list. R2's recorded pattern is the actual behavior.
 
 ## 8. Facts rule
 
