@@ -1,6 +1,6 @@
 # Phase 1 spec: explainers site, Bloom filter first
 
-Status: v7.4, repeatable seeding, 2026-09-04. Build ran 22:46 to 23:03 by commit timestamps (about 17 minutes of wall clock after the go; content and sourcing were done ahead). Nothing cut from the cut order. Nothing here is built. Lines added in the audit are marked (v5).
+Status: v7.5, prose pages restructured, 2026-09-04. Build ran 22:46 to 23:03 by commit timestamps (about 17 minutes of wall clock after the go; content and sourcing were done ahead). Nothing cut from the cut order. Nothing here is built. Lines added in the audit are marked (v5).
 
 Vocabulary used throughout: **explainer** is one concept's page (v1 has one: Bloom filter). **Playground** is the interactive part of an explainer, the strip of bulbs and its boxes. **Site** is the thing at the GitHub Pages URL that will eventually hold several explainers.
 
@@ -100,6 +100,8 @@ The cheapest form of "scalable" that fits in 2 hours is a file layout and a set 
 | D39 | Repo `tech-explainer`, site title "Tech explainer". Explainer URL `<user>.github.io/tech-explainer/bloom-filter/` | Decided |
 | D40 | The explainer is five pages in a fixed order: 1 Why (hook story), 2 How (playground), 3 Origin story, 4 Real-world applications, 5 Read further. Prev and Next move between them; on page 1 the Next button reads "Next: build it". The playground page is complete on its own; the reviewer path (R13) is one click from page 1, then never leaves page 2. Revised 2026-09-04 from four pages | Decided |
 | D46 | Palette per section 11a. Repaint 2026-09-04 | Decided |
+| D51 | Origin story is four labelled parts: The problem, The naive fix, The insight, Since then. Applications and Read further are one soft box per item; Read further boxes are whole-box links to the source | Decided |
+| D52 | Licence and implementation notices are not reader-facing. They live in an HTML comment inside each page's head and in `CREDITS.md`. The SCOWL licence requires its notice in every copy, and the embedded word list makes each page a copy, so the comment is not optional | Decided |
 | D48 | Type is Fredoka (SIL OFL), subsetted to Latin, weights 400–600, embedded as base64 woff2 in each page. No CDN, no external request, works with the network off. `font/OFL.txt` is in the repo and both pages credit it. Explainer 71 KB, landing 45 KB, both inside the 150 KB budget | Decided |
 | D49 | Shapes: borders 2 px (was 3–4), shadows 4 px (was 6), corners rounded (10 px controls, 14–16 px panels, pill chips), bulbs are circles. Ink softened to #3D372F, typed input to #4A433A, dropdown to #FFFDF6. Title sits on one line | Decided |
 | D47 | Each verdict carries a one-line reason naming the bulbs, not the words. Softens D7 | Default, veto to revert |
@@ -126,6 +128,7 @@ The check column is the deploy checklist. Run it top to bottom before every push
 | R9 | Hovering a word in the list highlights its 3 bulbs; on touch, tap toggles the same highlight | Hover each seed word, 3 bulbs highlight. On a phone or devtools touch emulation, tap works and persists until the next tap |
 | R10 | A bulb lit by more than one word shows the first word's color; hovering any of its words highlights it | Find a shared bulb in the seed pattern (recorded in `checks/seed-pattern.txt`). Hover both words. Both highlight it |
 | R11 | Reset returns to R1 state | Click reset after R6. Strip dark, list empty, add enabled |
+| R24 | Every Read further box is a whole-box link to a real source, and the licence notices are present in each page's source even though no reader sees them | Click each of the five boxes. Each opens its source. View source: the SCOWL and OFL notices are in the head comment. `CREDITS.md` is in the repo |
 | R12 | Every factual sentence on the page has a numbered source link in the footer that resolves | Open every footer link. Each loads. Each sentence's number matches a link. Zero unnumbered factual sentences (see section 8 for what counts) |
 | R13 | A reviewer landing on page 1 can click through to the playground and complete seed, query, suggest, query, hover, reset in under 60 seconds with no instructions | Hand the URL to one person who has not seen it. Time them. Do not speak |
 | R14 | Works on GitHub Pages at the project URL with no console errors | Open the live URL, open devtools console. Zero errors. Repeat R2 and R8 on the live page |
@@ -168,7 +171,7 @@ This rule applies identically to every future explainer. It is a site rule, not 
 
 Phase 1 is done when all of the following hold on the live GitHub Pages URL:
 
-1. R1 through R23 pass, checked off in `bloom-filter/checks/deploy-checklist.md` with the date.
+1. R1 through R24 pass, checked off in `bloom-filter/checks/deploy-checklist.md` with the date.
 2. One person who has never seen the page (the same session as R13 is fine) hit a false positive, was asked "why did it say might be", and gave an answer that mentions the bulbs already being on from other words. Record their words verbatim in `bloom-filter/checks/reader-test.md`. One failed attempt is logged, not hidden.
 3. Zero factual sentences without a footer number.
 4. Total build time logged and under 2 hours, or the overrun is written down with what was cut.
@@ -241,6 +244,6 @@ Still open after the build, all needing a person or a machine this sandbox does 
 ## 12. Sources
 
 1. Bloom, Burton H. "Space/time trade-offs in hash coding with allowable errors." Communications of the ACM 13(7): 422–426, July 1970. https://doi.org/10.1145/362686.362692
-2. Broder, Andrei, and Michael Mitzenmacher. "Network applications of Bloom filters: A survey." Internet Mathematics 1(4): 485–509, 2004. Source for the false-positive estimate (1 − e^(−kn/m))^k and the occupancy estimate 1 − (1 − 1/m)^(kn) used in section 7.
+2. Broder, Andrei, and Michael Mitzenmacher. "Network applications of Bloom filters: A survey." Internet Mathematics 1(4): 485–509, 2004. doi:10.1080/15427951.2004.10129096. Free author-hosted PDF: https://www.eecs.harvard.edu/~michaelm/postscripts/im2005b.pdf Source for the false-positive estimate (1 − e^(−kn/m))^k and the occupancy estimate 1 − (1 − 1/m)^(kn) used in section 7.
 
 Both citations were confirmed against the ACM record and a secondary reference list on 2026-09-04. The section 7 table was regenerated by a 5-line script on the same date; the script should be committed under `bloom-filter/checks/` so R7's numbers can be re-run.

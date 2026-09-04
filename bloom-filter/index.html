@@ -1,5 +1,15 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head><meta charset="utf-8">
+<!--
+  Tech explainer: Bloom filter. Source: https://github.com/zestytinker/tech-explainer
+  Third-party material embedded in this file (see CREDITS.md in the repository):
+  - Typeface: Fredoka, (c) The Fredoka Project Authors. SIL Open Font License 1.1, full text at font/OFL.txt.
+  - Word list: 3,096 words from SCOWL, Copyright 2000-2016 Kevin Atkinson and contributors.
+    Permission to use, copy, modify, distribute and sell these word lists is granted without fee,
+    provided this copyright notice appears in all copies. Via the wordlist-english npm package (MIT).
+  Filter: 24 bits, 3 hash functions (FNV-1a over UTF-8 with three seeds), input lowercased and trimmed.
+  Nothing typed on this page is sent anywhere.
+--><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Bloom filter | Tech explainer</title>
 <meta name="description" content="Build a tiny Bloom filter, then catch it being wrong.">
 <style>
@@ -25,6 +35,16 @@ h1{font-size:clamp(38px,6.4vw,60px);line-height:1.05;letter-spacing:-.005em;font
 h2{font-size:24px;font-weight:600;margin:0 0 10px}
 .lede{font-size:20px;max-width:34em;margin:0 0 20px}
 .prose p{max-width:36em;margin:0 0 14px}
+.prose h3{font-size:17px;font-weight:600;color:var(--ink);margin:22px 0 4px;letter-spacing:.01em}
+.prose h3:first-of-type{margin-top:10px}
+.prose h3+p{margin-top:0}
+.box{max-width:38em;background:#FFFDF6;border:2px solid var(--ink);border-radius:14px;padding:16px 20px;margin:0 0 14px;box-shadow:3px 3px 0 var(--ink)}
+.box h3{margin:0 0 6px}
+.box p{margin:0}
+a.box{display:block;text-decoration:none;color:var(--ink)}
+a.box:hover,a.box:focus-visible{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink);outline:none}
+a.box:focus-visible{outline:3px solid var(--berry);outline-offset:2px}
+a.box .what{color:var(--ink-soft);font-size:15px;margin-top:4px}
 .steps{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 26px}
 .steps button{font-weight:500;padding:8px 14px;background:var(--paper)}
 .steps button.cur{background:var(--ink);color:var(--butter)}
@@ -88,35 +108,45 @@ sup{font-weight:600}
 </section>
 
 <section class="page" id="p-origin"><div class="prose"><h2>Origin story</h2>
-<p>In 1970 Burton Bloom was looking at a problem where checking a big list was expensive and being occasionally wrong in one direction was survivable. He showed you could shrink the list to a strip of bits if you accepted a small rate of false "yes" answers, and never a false "no".<sup>[1]</sup></p>
-<p>His worked example was hyphenation. Of 500,000 words, about 90% could be hyphenated by simple rules; the other 50,000 needed a lookup in a dictionary too big for memory. A conventional in-memory index for those 50,000 would have taken about 2,000,000 bits. Accepting one wrong "yes" in sixteen, the same job fit in under 300,000 bits, small enough to keep in core, with the dictionary consulted only when the filter said might be.<sup>[1]</sup></p></div></section>
+<h3>The problem</h3>
+<p>In 1970 Burton Bloom was working on hyphenation. Of 500,000 words, about 90% could be split by simple rules. The other 50,000 were exceptions, and each one needed a lookup in a dictionary far too big to keep in memory, so it lived on disk.<sup>[1]</sup></p>
+<h3>The naive fix</h3>
+<p>Keep a small index in memory listing which words are exceptions, and only go to disk for those. Done the conventional way, that index needed roughly 2,000,000 bits, which was more memory than the machine could spare.<sup>[1]</sup></p>
+<h3>The insight</h3>
+<p>Allow the index to be wrong, but only in one direction. If it occasionally says "exception" about an ordinary word, you pay one needless disk lookup and find nothing. If it ever said "ordinary" about a real exception, the word would be hyphenated wrongly and nobody would know. At one wrong yes in sixteen, the same job fit in under 300,000 bits.<sup>[1]</sup></p>
+<h3>Since then</h3>
+<p>The trick outlived the hyphenation problem. Databases picked it up in the 1970s, and a 2004 survey collected the uses that had since appeared across networking.<sup>[2]</sup> Later variants trade the original's limits for other things, such as counting filters that allow items to be removed.<sup>[7]</sup></p></div></section>
 
 <section class="page" id="p-applications"><div class="prose"><h2>Real-world applications</h2>
 <p>The same shape shows up wherever a full lookup is expensive and a wrong "maybe" is cheap to catch.</p>
-<p><b>Databases that write files and never rewrite them.</b> Apache Cassandra keeps one filter per data file on disk, so a read for a row can skip every file whose filter says "definitely not". Operators tune the false-positive chance per table, trading memory for fewer wasted disk reads.<sup>[3]</sup> RocksDB does the same: each file gets a filter built when the file is written, and a lookup consults the filter before opening the file.<sup>[4]</sup></p>
-<p><b>The Bigtable paper.</b> Google's 2006 paper on Bigtable described attaching a Bloom filter to each of its immutable data files to avoid disk seeks for rows that aren't there. Many later systems of this kind inherited the idea from it.<sup>[5]</sup></p>
-<p><b>Bitcoin light clients, and a warning.</b> For years, lightweight Bitcoin wallets sent a Bloom filter of their addresses to full nodes, which replied with only the transactions that "might be" theirs. In 2019 Bitcoin Core disabled serving those filters by default, calling them a well-known denial-of-service target. The lesson travels: "might be" is cheap for the asker and can be expensive for whoever has to answer.<sup>[6]</sup></p></div></section>
+<div class="box"><h3>Databases that write files and never rewrite them</h3>
+<p>Apache Cassandra keeps one filter per data file on disk, so a read for a row can skip every file whose filter says "definitely not". Operators tune the false-positive chance per table, trading memory for fewer wasted disk reads.<sup>[3]</sup> RocksDB does the same: each file gets a filter built when the file is written, and a lookup consults the filter before opening the file.<sup>[4]</sup></p></div>
+<div class="box"><h3>The Bigtable paper</h3>
+<p>Google's 2006 paper on Bigtable described attaching a Bloom filter to each of its immutable data files to avoid disk seeks for rows that aren't there. Many later systems of this kind inherited the idea from it.<sup>[5]</sup></p></div>
+<div class="box"><h3>Bitcoin light clients, and a warning</h3>
+<p>For years, lightweight Bitcoin wallets sent a Bloom filter of their addresses to full nodes, which replied with only the transactions that "might be" theirs. In 2019 Bitcoin Core disabled serving those filters by default, calling them a well-known denial-of-service target. The lesson travels: "might be" is cheap for the asker and can be expensive for whoever has to answer.<sup>[6]</sup></p></div>
+</div></section>
 
 <section class="page" id="p-further"><div class="prose"><h2>Read further</h2>
-<ol class="links">
-<li>The 1970 paper. Four pages, readable without a mathematics background for the first half.<sup>[1]</sup></li>
-<li>Broder and Mitzenmacher's 2004 survey, where the sizing formulas on this site come from.<sup>[2]</sup></li>
-<li>Wikipedia's article, for the variants: counting, cuckoo, blocked.<sup>[7]</sup></li>
-<li>The Cassandra and RocksDB documentation pages, if you want to see the knobs real systems expose.<sup>[3][4]</sup></li>
-</ol></div></section>
+<a class="box" href="https://doi.org/10.1145/362686.362692"><h3>The 1970 paper</h3><p>Bloom's original four pages. Readable without a mathematics background for the first half.</p><p class="what">Communications of the ACM 13(7)</p></a>
+<a class="box" href="https://www.eecs.harvard.edu/~michaelm/postscripts/im2005b.pdf"><h3>Broder and Mitzenmacher's survey</h3><p>Where the sizing formulas on this page come from, and how the idea spread through networking.</p><p class="what">Internet Mathematics 1(4), 2004, free PDF from the author</p></a>
+<a class="box" href="https://en.wikipedia.org/wiki/Bloom_filter"><h3>The variants</h3><p>Counting, cuckoo and blocked filters, each trading something the original could not do.</p><p class="what">Wikipedia</p></a>
+<a class="box" href="https://cassandra.apache.org/doc/latest/cassandra/managing/operating/bloom_filters.html"><h3>Cassandra's filter settings</h3><p>What the knobs look like in a real system, including the false-positive chance you can set per table.</p><p class="what">Apache Cassandra documentation</p></a>
+<a class="box" href="https://github.com/facebook/rocksdb/wiki/RocksDB-Bloom-Filter"><h3>RocksDB's implementation notes</h3><p>How the filters are built, stored inside each file, and read back.</p><p class="what">RocksDB wiki</p></a>
+</div></section>
 
 <div class="pager"><button id="prev">Prev</button><span class="where" id="where"></span><button id="next">Next</button></div>
 
 <div class="sources"><b>Sources</b><ol>
 <li>Bloom, B. H. (1970). Space/time trade-offs in hash coding with allowable errors. Communications of the ACM 13(7): 422–426. <a href="https://doi.org/10.1145/362686.362692">doi:10.1145/362686.362692</a></li>
-<li>Broder, A. and Mitzenmacher, M. (2004). Network applications of Bloom filters: a survey. Internet Mathematics 1(4): 485–509.</li>
+<li>Broder, A. and Mitzenmacher, M. (2004). Network applications of Bloom filters: a survey. Internet Mathematics 1(4): 485–509. <a href="https://doi.org/10.1080/15427951.2004.10129096">doi:10.1080/15427951.2004.10129096</a></li>
 <li>Apache Cassandra documentation, Bloom Filters. <a href="https://cassandra.apache.org/doc/latest/cassandra/managing/operating/bloom_filters.html">cassandra.apache.org</a> (checked 2026-09-04)</li>
 <li>RocksDB wiki, RocksDB Bloom Filter. <a href="https://github.com/facebook/rocksdb/wiki/RocksDB-Bloom-Filter">github.com/facebook/rocksdb</a> (checked 2026-09-04)</li>
 <li>Chang, F. et al. (2006). Bigtable: A Distributed Storage System for Structured Data. OSDI. <a href="https://www.usenix.org/legacy/event/osdi06/tech/chang/chang.pdf">usenix.org</a></li>
 <li>Bitcoin Core PR #16152, Disable bloom filtering by default (2019). <a href="https://github.com/bitcoin/bitcoin/pull/16152">github.com/bitcoin</a></li>
 <li>Wikipedia, Bloom filter. <a href="https://en.wikipedia.org/wiki/Bloom_filter">en.wikipedia.org</a></li>
 </ol>
-<p>Type is <a href="https://fonts.google.com/specimen/Fredoka">Fredoka</a>, embedded in this page under the SIL Open Font License (see <a href="../font/OFL.txt">OFL.txt</a>). The "Suggest a word" button draws from 3,096 common English words from SCOWL (Copyright 2000–2016 Kevin Atkinson, used with permission per its licence), via the <a href="https://www.npmjs.com/package/wordlist-english">wordlist-english</a> package. The filter on this page: 24 bits, 3 hash functions (FNV-1a over UTF-8 with three seeds), input lowercased and trimmed. Nothing you type leaves this page.</p>
+
 </div>
 
 <script>
