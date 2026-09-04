@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>Bloom filter</title>
+<style>
+:root{--ink:#1a1a1a;--paper:#FFE566;--panel:#fff;--grey:#E9E9E9;--pink:#FF4D9D;--green:#2BD66B;--orange:#FF7A00;--purple:#7B3FE4;--red:#F02D2D;--brown:#A0522D;--lime:#B8E62E;--magenta:#C71585;--shadow:6px 6px 0 var(--ink)}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;color:var(--ink);font:17px/1.6 "Avenir Next","Segoe UI","Helvetica Neue",system-ui,sans-serif;max-width:920px;padding:28px 20px 60px;margin:0 auto}
+a{color:var(--ink)}
+nav{font-weight:700;margin-bottom:28px}
+nav a{display:inline-block;border:3px solid var(--ink);padding:4px 10px;background:var(--panel);text-decoration:none;box-shadow:3px 3px 0 var(--ink)}
+h1{font-size:clamp(40px,7vw,64px);line-height:1.02;letter-spacing:-.01em;font-weight:700;margin:0 0 14px}
+.lede{font-size:20px;max-width:34em;margin:0 0 26px}
+.panel{background:var(--panel);border:4px solid var(--ink);box-shadow:var(--shadow);padding:20px;margin-bottom:34px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch}
+input{font:inherit;font-weight:500;padding:10px 12px;border:3px solid var(--ink);background:var(--grey);min-width:0;flex:1 1 200px;box-shadow:3px 3px 0 var(--ink)}
+input:focus{outline:none;background:#fff}
+button{font:inherit;font-weight:700;padding:10px 16px;border:3px solid var(--ink);background:var(--panel);box-shadow:3px 3px 0 var(--ink);cursor:pointer}
+button:active{transform:translate(3px,3px);box-shadow:none}
+button.primary{background:var(--paper)}
+button.secondary{background:var(--panel)}
+button[disabled]{background:#ddd;color:#777;box-shadow:none;cursor:default}
+.strip{display:grid;grid-template-columns:repeat(24,1fr);gap:8px;margin:26px 0 18px}
+.bulb{aspect-ratio:1;border:3px solid var(--ink);background:var(--grey);position:relative}
+.bulb.on{box-shadow:inset 0 0 0 2px #fff}
+.bulb.ring{outline:4px solid var(--ink);outline-offset:3px}
+.bulb.hi{transform:scale(1.18);z-index:1;box-shadow:4px 4px 0 var(--ink)}
+.strip.dim .bulb:not(.hi){opacity:.28}
+.words{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chip{border:3px solid var(--ink);padding:3px 10px;font-weight:600;color:#fff;cursor:default;box-shadow:3px 3px 0 var(--ink);user-select:none}
+.chip:hover,.chip:focus{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink);outline:none}
+.verdict{margin-top:18px;display:inline-block;font:600 24px/1.2 "Avenir Next","Segoe UI","Helvetica Neue",system-ui,sans-serif;padding:14px 18px;border:4px solid var(--ink);background:var(--ink);color:var(--paper);box-shadow:6px 6px 0 var(--pink)}
+.verdict.no{background:var(--grey);color:var(--ink);box-shadow:6px 6px 0 var(--ink)}
+h2{font-size:24px;font-weight:700;margin:0 0 10px}
+.origin p{max-width:36em;margin:0}
+sup{font-weight:600}
+.sources{margin-top:38px;border-top:4px solid var(--ink);padding-top:12px;font-size:15px}
+.sources ol{padding-left:22px}.sources li{margin:6px 0}
+@media(max-width:480px){.strip{grid-template-columns:repeat(8,1fr);gap:7px}.panel{padding:14px}.verdict{font-size:20px}}
+</style></head><body>
+<nav><a href="landing.html">All explainers</a></nav>
+<h1>Bloom<br>filter</h1>
+<p class="lede">A list that can say "definitely not" or "might be", and nothing else. Add words, then ask about one you never added.</p>
+
+<div class="panel">
+  <div class="row"><input placeholder="add a word" value=""><button class="primary">Add</button><button disabled>Seed 8 words</button><button class="secondary">Reset</button></div>
+  <div class="strip" id="strip"></div>
+  <div class="words" id="words"></div>
+  <div class="row"><input placeholder="is this word in the set?" value="penguin"><button class="primary">Check</button><button class="secondary">Suggest a word</button></div>
+  <div class="verdict" id="verdict">Might be in the set</div>
+</div>
+
+<div class="origin"><h2>Why this exists</h2>
+<p>In 1970 Burton Bloom was looking at a problem where checking a big list was expensive and being occasionally wrong in one direction was survivable. He showed you could shrink the list to a strip of bits if you accepted a small rate of false "yes" answers, and never a false "no".<sup>[1]</sup></p></div>
+
+<div class="sources"><b>Sources</b><ol>
+<li>Bloom, B. H. (1970). Space/time trade-offs in hash coding with allowable errors. Communications of the ACM 13(7). <a href="https://doi.org/10.1145/362686.362692">doi:10.1145/362686.362692</a></li>
+<li>Broder, A. and Mitzenmacher, M. (2004). Network applications of Bloom filters: a survey. Internet Mathematics 1(4).</li>
+</ol></div>
+
+<script>
+// Preview only: fixed seed pattern, no hashing. Same numbers as the design wireframes.
+const C={cat:'var(--red)',dog:'var(--purple)',fig:'var(--green)',sun:'var(--magenta)',map:'var(--orange)',jar:'var(--brown)',owl:'var(--pink)',ink:'var(--lime)'};
+const B={cat:[4,11,19],dog:[2,11,22],fig:[7,15,19],sun:[0,9,14],map:[3,11,20],jar:[5,13,23],owl:[1,9,18],ink:[8,15,21]};
+const ring=[4,11,22]; // penguin's bulbs, all already lit
+const strip=document.getElementById('strip'),words=document.getElementById('words');
+const owner={};
+for(const w of Object.keys(B))for(const b of B[w])if(!(b in owner))owner[b]=w;   // first word wins (D16)
+const bulbs=[];
+for(let i=0;i<24;i++){const d=document.createElement('div');d.className='bulb'+(i in owner?' on':'')+(ring.includes(i)?' ring':'');if(i in owner)d.style.background=C[owner[i]];d.title='bulb '+i;strip.appendChild(d);bulbs.push(d);}
+for(const w of Object.keys(B)){const c=document.createElement('span');c.className='chip';c.tabIndex=0;c.textContent=w;c.style.background=C[w];if(w==='ink')c.style.color='var(--ink)';
+ const on=()=>{strip.classList.add('dim');B[w].forEach(i=>bulbs[i].classList.add('hi'));};
+ const off=()=>{strip.classList.remove('dim');bulbs.forEach(b=>b.classList.remove('hi'));};
+ c.onmouseenter=on;c.onmouseleave=off;c.onfocus=on;c.onblur=off;c.onclick=()=>c.classList.toggle('pin');words.appendChild(c);}
+</script>
+</body></html>

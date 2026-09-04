@@ -1,0 +1,1757 @@
+[
+ {
+  "name": "array",
+  "category": "data structures",
+  "aliases": [],
+  "wiki": "Array (data structure)",
+  "path": null
+ },
+ {
+  "name": "linked list",
+  "category": "data structures",
+  "aliases": [],
+  "wiki": "Linked list",
+  "path": null
+ },
+ {
+  "name": "stack",
+  "category": "data structures",
+  "aliases": [],
+  "wiki": "Stack (abstract data type)",
+  "path": null
+ },
+ {
+  "name": "queue",
+  "category": "data structures",
+  "aliases": [],
+  "wiki": "Queue (abstract data type)",
+  "path": null
+ },
+ {
+  "name": "hash table",
+  "category": "data structures",
+  "aliases": [
+   "hash map",
+   "hashmap",
+   "dictionary"
+  ],
+  "wiki": "Hash table",
+  "path": null
+ },
+ {
+  "name": "binary search tree",
+  "category": "data structures",
+  "aliases": [
+   "bst"
+  ],
+  "wiki": "Binary search tree",
+  "path": null
+ },
+ {
+  "name": "b-tree",
+  "category": "data structures",
+  "aliases": [
+   "btree",
+   "b tree"
+  ],
+  "wiki": "B-tree",
+  "path": null
+ },
+ {
+  "name": "heap",
+  "category": "data structures",
+  "aliases": [
+   "priority queue"
+  ],
+  "wiki": "Heap (data structure)",
+  "path": null
+ },
+ {
+  "name": "trie",
+  "category": "data structures",
+  "aliases": [
+   "prefix tree"
+  ],
+  "wiki": "Trie",
+  "path": null
+ },
+ {
+  "name": "graph",
+  "category": "data structures",
+  "aliases": [],
+  "wiki": "Graph (abstract data type)",
+  "path": null
+ },
+ {
+  "name": "bloom filter",
+  "category": "data structures",
+  "aliases": [
+   "bloom filters"
+  ],
+  "wiki": "Bloom filter",
+  "path": "/bloom-filter/"
+ },
+ {
+  "name": "cuckoo filter",
+  "category": "data structures",
+  "aliases": [],
+  "wiki": "Cuckoo filter",
+  "path": null
+ },
+ {
+  "name": "skip list",
+  "category": "data structures",
+  "aliases": [],
+  "wiki": "Skip list",
+  "path": null
+ },
+ {
+  "name": "red-black tree",
+  "category": "data structures",
+  "aliases": [
+   "red black tree"
+  ],
+  "wiki": "Red\u2013black tree",
+  "path": null
+ },
+ {
+  "name": "lsm tree",
+  "category": "data structures",
+  "aliases": [
+   "log-structured merge tree",
+   "log structured merge tree"
+  ],
+  "wiki": "Log-structured merge-tree",
+  "path": null
+ },
+ {
+  "name": "merkle tree",
+  "category": "data structures",
+  "aliases": [
+   "hash tree"
+  ],
+  "wiki": "Merkle tree",
+  "path": null
+ },
+ {
+  "name": "ring buffer",
+  "category": "data structures",
+  "aliases": [
+   "circular buffer"
+  ],
+  "wiki": "Circular buffer",
+  "path": null
+ },
+ {
+  "name": "bitmap",
+  "category": "data structures",
+  "aliases": [
+   "bit array",
+   "bitset"
+  ],
+  "wiki": "Bit array",
+  "path": null
+ },
+ {
+  "name": "hyperloglog",
+  "category": "data structures",
+  "aliases": [
+   "hll"
+  ],
+  "wiki": "HyperLogLog",
+  "path": null
+ },
+ {
+  "name": "count-min sketch",
+  "category": "data structures",
+  "aliases": [
+   "count min sketch"
+  ],
+  "wiki": "Count\u2013min sketch",
+  "path": null
+ },
+ {
+  "name": "binary search",
+  "category": "algorithms",
+  "aliases": [],
+  "wiki": "Binary search",
+  "path": null
+ },
+ {
+  "name": "quicksort",
+  "category": "algorithms",
+  "aliases": [
+   "quick sort"
+  ],
+  "wiki": "Quicksort",
+  "path": null
+ },
+ {
+  "name": "merge sort",
+  "category": "algorithms",
+  "aliases": [
+   "mergesort"
+  ],
+  "wiki": "Merge sort",
+  "path": null
+ },
+ {
+  "name": "heapsort",
+  "category": "algorithms",
+  "aliases": [
+   "heap sort"
+  ],
+  "wiki": "Heapsort",
+  "path": null
+ },
+ {
+  "name": "dijkstra's algorithm",
+  "category": "algorithms",
+  "aliases": [
+   "dijkstra",
+   "shortest path"
+  ],
+  "wiki": "Dijkstra's algorithm",
+  "path": null
+ },
+ {
+  "name": "breadth-first search",
+  "category": "algorithms",
+  "aliases": [
+   "bfs",
+   "breadth first search"
+  ],
+  "wiki": "Breadth-first search",
+  "path": null
+ },
+ {
+  "name": "depth-first search",
+  "category": "algorithms",
+  "aliases": [
+   "dfs",
+   "depth first search"
+  ],
+  "wiki": "Depth-first search",
+  "path": null
+ },
+ {
+  "name": "dynamic programming",
+  "category": "algorithms",
+  "aliases": [],
+  "wiki": "Dynamic programming",
+  "path": null
+ },
+ {
+  "name": "big o notation",
+  "category": "algorithms",
+  "aliases": [
+   "big o",
+   "time complexity"
+  ],
+  "wiki": "Big O notation",
+  "path": null
+ },
+ {
+  "name": "recursion",
+  "category": "algorithms",
+  "aliases": [],
+  "wiki": "Recursion (computer science)",
+  "path": null
+ },
+ {
+  "name": "hash function",
+  "category": "algorithms",
+  "aliases": [
+   "hashing"
+  ],
+  "wiki": "Hash function",
+  "path": null
+ },
+ {
+  "name": "consistent hashing",
+  "category": "algorithms",
+  "aliases": [],
+  "wiki": "Consistent hashing",
+  "path": null
+ },
+ {
+  "name": "pagerank",
+  "category": "algorithms",
+  "aliases": [
+   "page rank"
+  ],
+  "wiki": "PageRank",
+  "path": null
+ },
+ {
+  "name": "a* search",
+  "category": "algorithms",
+  "aliases": [
+   "a star",
+   "a*"
+  ],
+  "wiki": "A* search algorithm",
+  "path": null
+ },
+ {
+  "name": "two's complement",
+  "category": "algorithms",
+  "aliases": [
+   "twos complement"
+  ],
+  "wiki": "Two's complement",
+  "path": null
+ },
+ {
+  "name": "floating point",
+  "category": "algorithms",
+  "aliases": [
+   "ieee 754"
+  ],
+  "wiki": "Floating-point arithmetic",
+  "path": null
+ },
+ {
+  "name": "regular expression",
+  "category": "algorithms",
+  "aliases": [
+   "regex",
+   "regexp"
+  ],
+  "wiki": "Regular expression",
+  "path": null
+ },
+ {
+  "name": "levenshtein distance",
+  "category": "algorithms",
+  "aliases": [
+   "edit distance"
+  ],
+  "wiki": "Levenshtein distance",
+  "path": null
+ },
+ {
+  "name": "run-length encoding",
+  "category": "algorithms",
+  "aliases": [
+   "rle"
+  ],
+  "wiki": "Run-length encoding",
+  "path": null
+ },
+ {
+  "name": "huffman coding",
+  "category": "algorithms",
+  "aliases": [
+   "huffman"
+  ],
+  "wiki": "Huffman coding",
+  "path": null
+ },
+ {
+  "name": "lz77",
+  "category": "algorithms",
+  "aliases": [
+   "lempel-ziv"
+  ],
+  "wiki": "LZ77 and LZ78",
+  "path": null
+ },
+ {
+  "name": "crc",
+  "category": "algorithms",
+  "aliases": [
+   "cyclic redundancy check"
+  ],
+  "wiki": "Cyclic redundancy check",
+  "path": null
+ },
+ {
+  "name": "reed-solomon",
+  "category": "algorithms",
+  "aliases": [
+   "reed solomon",
+   "erasure coding"
+  ],
+  "wiki": "Reed\u2013Solomon error correction",
+  "path": null
+ },
+ {
+  "name": "fft",
+  "category": "algorithms",
+  "aliases": [
+   "fast fourier transform"
+  ],
+  "wiki": "Fast Fourier transform",
+  "path": null
+ },
+ {
+  "name": "monte carlo method",
+  "category": "algorithms",
+  "aliases": [
+   "monte carlo"
+  ],
+  "wiki": "Monte Carlo method",
+  "path": null
+ },
+ {
+  "name": "tcp",
+  "category": "networking",
+  "aliases": [
+   "transmission control protocol"
+  ],
+  "wiki": "Transmission Control Protocol",
+  "path": null
+ },
+ {
+  "name": "udp",
+  "category": "networking",
+  "aliases": [],
+  "wiki": "User Datagram Protocol",
+  "path": null
+ },
+ {
+  "name": "ip address",
+  "category": "networking",
+  "aliases": [
+   "ip"
+  ],
+  "wiki": "IP address",
+  "path": null
+ },
+ {
+  "name": "dns",
+  "category": "networking",
+  "aliases": [
+   "domain name system"
+  ],
+  "wiki": "Domain Name System",
+  "path": null
+ },
+ {
+  "name": "http",
+  "category": "networking",
+  "aliases": [
+   "hypertext transfer protocol"
+  ],
+  "wiki": "HTTP",
+  "path": null
+ },
+ {
+  "name": "https",
+  "category": "networking",
+  "aliases": [],
+  "wiki": "HTTPS",
+  "path": null
+ },
+ {
+  "name": "tls",
+  "category": "networking",
+  "aliases": [
+   "ssl"
+  ],
+  "wiki": "Transport Layer Security",
+  "path": null
+ },
+ {
+  "name": "websocket",
+  "category": "networking",
+  "aliases": [
+   "websockets"
+  ],
+  "wiki": "WebSocket",
+  "path": null
+ },
+ {
+  "name": "cdn",
+  "category": "networking",
+  "aliases": [
+   "content delivery network"
+  ],
+  "wiki": "Content delivery network",
+  "path": null
+ },
+ {
+  "name": "load balancer",
+  "category": "networking",
+  "aliases": [
+   "load balancing"
+  ],
+  "wiki": "Load balancing (computing)",
+  "path": null
+ },
+ {
+  "name": "nat",
+  "category": "networking",
+  "aliases": [
+   "network address translation"
+  ],
+  "wiki": "Network address translation",
+  "path": null
+ },
+ {
+  "name": "bgp",
+  "category": "networking",
+  "aliases": [],
+  "wiki": "Border Gateway Protocol",
+  "path": null
+ },
+ {
+  "name": "osi model",
+  "category": "networking",
+  "aliases": [
+   "osi"
+  ],
+  "wiki": "OSI model",
+  "path": null
+ },
+ {
+  "name": "latency",
+  "category": "networking",
+  "aliases": [],
+  "wiki": "Latency (engineering)",
+  "path": null
+ },
+ {
+  "name": "bandwidth",
+  "category": "networking",
+  "aliases": [],
+  "wiki": "Bandwidth (computing)",
+  "path": null
+ },
+ {
+  "name": "packet switching",
+  "category": "networking",
+  "aliases": [],
+  "wiki": "Packet switching",
+  "path": null
+ },
+ {
+  "name": "mtu",
+  "category": "networking",
+  "aliases": [
+   "maximum transmission unit"
+  ],
+  "wiki": "Maximum transmission unit",
+  "path": null
+ },
+ {
+  "name": "three-way handshake",
+  "category": "networking",
+  "aliases": [
+   "tcp handshake"
+  ],
+  "wiki": "Handshake (computing)",
+  "path": null
+ },
+ {
+  "name": "quic",
+  "category": "networking",
+  "aliases": [],
+  "wiki": "QUIC",
+  "path": null
+ },
+ {
+  "name": "http/2",
+  "category": "networking",
+  "aliases": [
+   "http2"
+  ],
+  "wiki": "HTTP/2",
+  "path": null
+ },
+ {
+  "name": "sql",
+  "category": "databases",
+  "aliases": [],
+  "wiki": "SQL",
+  "path": null
+ },
+ {
+  "name": "relational database",
+  "category": "databases",
+  "aliases": [
+   "rdbms"
+  ],
+  "wiki": "Relational database",
+  "path": null
+ },
+ {
+  "name": "nosql",
+  "category": "databases",
+  "aliases": [],
+  "wiki": "NoSQL",
+  "path": null
+ },
+ {
+  "name": "acid",
+  "category": "databases",
+  "aliases": [],
+  "wiki": "ACID",
+  "path": null
+ },
+ {
+  "name": "database index",
+  "category": "databases",
+  "aliases": [
+   "index"
+  ],
+  "wiki": "Database index",
+  "path": null
+ },
+ {
+  "name": "database transaction",
+  "category": "databases",
+  "aliases": [
+   "transaction"
+  ],
+  "wiki": "Database transaction",
+  "path": null
+ },
+ {
+  "name": "normalization",
+  "category": "databases",
+  "aliases": [
+   "database normalization"
+  ],
+  "wiki": "Database normalization",
+  "path": null
+ },
+ {
+  "name": "sharding",
+  "category": "databases",
+  "aliases": [
+   "shard"
+  ],
+  "wiki": "Shard (database architecture)",
+  "path": null
+ },
+ {
+  "name": "replication",
+  "category": "databases",
+  "aliases": [
+   "database replication"
+  ],
+  "wiki": "Replication (computing)",
+  "path": null
+ },
+ {
+  "name": "write-ahead log",
+  "category": "databases",
+  "aliases": [
+   "wal",
+   "write ahead log"
+  ],
+  "wiki": "Write-ahead logging",
+  "path": null
+ },
+ {
+  "name": "mvcc",
+  "category": "databases",
+  "aliases": [
+   "multiversion concurrency control"
+  ],
+  "wiki": "Multiversion concurrency control",
+  "path": null
+ },
+ {
+  "name": "query optimizer",
+  "category": "databases",
+  "aliases": [
+   "query planner"
+  ],
+  "wiki": "Query optimization",
+  "path": null
+ },
+ {
+  "name": "orm",
+  "category": "databases",
+  "aliases": [
+   "object-relational mapping"
+  ],
+  "wiki": "Object\u2013relational mapping",
+  "path": null
+ },
+ {
+  "name": "key-value store",
+  "category": "databases",
+  "aliases": [
+   "key value store"
+  ],
+  "wiki": "Key\u2013value database",
+  "path": null
+ },
+ {
+  "name": "time series database",
+  "category": "databases",
+  "aliases": [],
+  "wiki": "Time series database",
+  "path": null
+ },
+ {
+  "name": "graph database",
+  "category": "databases",
+  "aliases": [],
+  "wiki": "Graph database",
+  "path": null
+ },
+ {
+  "name": "cap theorem",
+  "category": "databases",
+  "aliases": [
+   "cap"
+  ],
+  "wiki": "CAP theorem",
+  "path": null
+ },
+ {
+  "name": "eventual consistency",
+  "category": "databases",
+  "aliases": [],
+  "wiki": "Eventual consistency",
+  "path": null
+ },
+ {
+  "name": "deadlock",
+  "category": "databases",
+  "aliases": [],
+  "wiki": "Deadlock (computer science)",
+  "path": null
+ },
+ {
+  "name": "connection pool",
+  "category": "databases",
+  "aliases": [
+   "connection pooling"
+  ],
+  "wiki": "Connection pool",
+  "path": null
+ },
+ {
+  "name": "consensus",
+  "category": "distributed systems",
+  "aliases": [
+   "consensus algorithm"
+  ],
+  "wiki": "Consensus (computer science)",
+  "path": null
+ },
+ {
+  "name": "raft",
+  "category": "distributed systems",
+  "aliases": [],
+  "wiki": "Raft (algorithm)",
+  "path": null
+ },
+ {
+  "name": "paxos",
+  "category": "distributed systems",
+  "aliases": [],
+  "wiki": "Paxos (computer science)",
+  "path": null
+ },
+ {
+  "name": "leader election",
+  "category": "distributed systems",
+  "aliases": [],
+  "wiki": "Leader election",
+  "path": null
+ },
+ {
+  "name": "vector clock",
+  "category": "distributed systems",
+  "aliases": [],
+  "wiki": "Vector clock",
+  "path": null
+ },
+ {
+  "name": "lamport timestamp",
+  "category": "distributed systems",
+  "aliases": [
+   "logical clock"
+  ],
+  "wiki": "Lamport timestamp",
+  "path": null
+ },
+ {
+  "name": "two-phase commit",
+  "category": "distributed systems",
+  "aliases": [
+   "2pc",
+   "two phase commit"
+  ],
+  "wiki": "Two-phase commit protocol",
+  "path": null
+ },
+ {
+  "name": "idempotency",
+  "category": "distributed systems",
+  "aliases": [
+   "idempotent"
+  ],
+  "wiki": "Idempotence",
+  "path": null
+ },
+ {
+  "name": "message queue",
+  "category": "distributed systems",
+  "aliases": [
+   "queue"
+  ],
+  "wiki": "Message queue",
+  "path": null
+ },
+ {
+  "name": "publish-subscribe",
+  "category": "distributed systems",
+  "aliases": [
+   "pubsub",
+   "pub/sub",
+   "pub sub"
+  ],
+  "wiki": "Publish\u2013subscribe pattern",
+  "path": null
+ },
+ {
+  "name": "microservices",
+  "category": "distributed systems",
+  "aliases": [
+   "microservice"
+  ],
+  "wiki": "Microservices",
+  "path": null
+ },
+ {
+  "name": "service mesh",
+  "category": "distributed systems",
+  "aliases": [],
+  "wiki": "Service mesh",
+  "path": null
+ },
+ {
+  "name": "circuit breaker",
+  "category": "distributed systems",
+  "aliases": [],
+  "wiki": "Circuit breaker design pattern",
+  "path": null
+ },
+ {
+  "name": "rate limiting",
+  "category": "distributed systems",
+  "aliases": [
+   "rate limiter",
+   "token bucket"
+  ],
+  "wiki": "Rate limiting",
+  "path": null
+ },
+ {
+  "name": "backpressure",
+  "category": "distributed systems",
+  "aliases": [],
+  "wiki": "Back pressure",
+  "path": null
+ },
+ {
+  "name": "gossip protocol",
+  "category": "distributed systems",
+  "aliases": [],
+  "wiki": "Gossip protocol",
+  "path": null
+ },
+ {
+  "name": "byzantine fault tolerance",
+  "category": "distributed systems",
+  "aliases": [
+   "bft"
+  ],
+  "wiki": "Byzantine fault",
+  "path": null
+ },
+ {
+  "name": "distributed hash table",
+  "category": "distributed systems",
+  "aliases": [
+   "dht"
+  ],
+  "wiki": "Distributed hash table",
+  "path": null
+ },
+ {
+  "name": "mapreduce",
+  "category": "distributed systems",
+  "aliases": [
+   "map reduce"
+  ],
+  "wiki": "MapReduce",
+  "path": null
+ },
+ {
+  "name": "crdt",
+  "category": "distributed systems",
+  "aliases": [
+   "conflict-free replicated data type"
+  ],
+  "wiki": "Conflict-free replicated data type",
+  "path": null
+ },
+ {
+  "name": "process",
+  "category": "operating systems",
+  "aliases": [],
+  "wiki": "Process (computing)",
+  "path": null
+ },
+ {
+  "name": "thread",
+  "category": "operating systems",
+  "aliases": [
+   "threads",
+   "multithreading"
+  ],
+  "wiki": "Thread (computing)",
+  "path": null
+ },
+ {
+  "name": "virtual memory",
+  "category": "operating systems",
+  "aliases": [],
+  "wiki": "Virtual memory",
+  "path": null
+ },
+ {
+  "name": "paging",
+  "category": "operating systems",
+  "aliases": [
+   "page table"
+  ],
+  "wiki": "Memory paging",
+  "path": null
+ },
+ {
+  "name": "cache",
+  "category": "operating systems",
+  "aliases": [
+   "caching",
+   "cpu cache"
+  ],
+  "wiki": "Cache (computing)",
+  "path": null
+ },
+ {
+  "name": "lru cache",
+  "category": "operating systems",
+  "aliases": [
+   "lru",
+   "least recently used"
+  ],
+  "wiki": "Cache replacement policies",
+  "path": null
+ },
+ {
+  "name": "mutex",
+  "category": "operating systems",
+  "aliases": [
+   "lock"
+  ],
+  "wiki": "Lock (computer science)",
+  "path": null
+ },
+ {
+  "name": "semaphore",
+  "category": "operating systems",
+  "aliases": [],
+  "wiki": "Semaphore (programming)",
+  "path": null
+ },
+ {
+  "name": "race condition",
+  "category": "operating systems",
+  "aliases": [],
+  "wiki": "Race condition",
+  "path": null
+ },
+ {
+  "name": "context switch",
+  "category": "operating systems",
+  "aliases": [
+   "context switching"
+  ],
+  "wiki": "Context switch",
+  "path": null
+ },
+ {
+  "name": "system call",
+  "category": "operating systems",
+  "aliases": [
+   "syscall"
+  ],
+  "wiki": "System call",
+  "path": null
+ },
+ {
+  "name": "file system",
+  "category": "operating systems",
+  "aliases": [
+   "filesystem"
+  ],
+  "wiki": "File system",
+  "path": null
+ },
+ {
+  "name": "garbage collection",
+  "category": "operating systems",
+  "aliases": [
+   "gc"
+  ],
+  "wiki": "Garbage collection (computer science)",
+  "path": null
+ },
+ {
+  "name": "stack overflow",
+  "category": "operating systems",
+  "aliases": [],
+  "wiki": "Stack overflow",
+  "path": null
+ },
+ {
+  "name": "memory leak",
+  "category": "operating systems",
+  "aliases": [],
+  "wiki": "Memory leak",
+  "path": null
+ },
+ {
+  "name": "pipeline",
+  "category": "operating systems",
+  "aliases": [
+   "cpu pipeline",
+   "instruction pipelining"
+  ],
+  "wiki": "Instruction pipelining",
+  "path": null
+ },
+ {
+  "name": "branch prediction",
+  "category": "operating systems",
+  "aliases": [],
+  "wiki": "Branch predictor",
+  "path": null
+ },
+ {
+  "name": "interrupt",
+  "category": "operating systems",
+  "aliases": [],
+  "wiki": "Interrupt",
+  "path": null
+ },
+ {
+  "name": "scheduler",
+  "category": "operating systems",
+  "aliases": [
+   "scheduling"
+  ],
+  "wiki": "Scheduling (computing)",
+  "path": null
+ },
+ {
+  "name": "container",
+  "category": "operating systems",
+  "aliases": [
+   "containers",
+   "docker"
+  ],
+  "wiki": "OS-level virtualization",
+  "path": null
+ },
+ {
+  "name": "virtual machine",
+  "category": "operating systems",
+  "aliases": [
+   "vm",
+   "hypervisor"
+  ],
+  "wiki": "Virtual machine",
+  "path": null
+ },
+ {
+  "name": "endianness",
+  "category": "operating systems",
+  "aliases": [
+   "big endian",
+   "little endian"
+  ],
+  "wiki": "Endianness",
+  "path": null
+ },
+ {
+  "name": "public key cryptography",
+  "category": "security",
+  "aliases": [
+   "asymmetric encryption",
+   "public-key cryptography"
+  ],
+  "wiki": "Public-key cryptography",
+  "path": null
+ },
+ {
+  "name": "rsa",
+  "category": "security",
+  "aliases": [],
+  "wiki": "RSA cryptosystem",
+  "path": null
+ },
+ {
+  "name": "aes",
+  "category": "security",
+  "aliases": [
+   "symmetric encryption"
+  ],
+  "wiki": "Advanced Encryption Standard",
+  "path": null
+ },
+ {
+  "name": "sha-256",
+  "category": "security",
+  "aliases": [
+   "sha256",
+   "sha"
+  ],
+  "wiki": "SHA-2",
+  "path": null
+ },
+ {
+  "name": "digital signature",
+  "category": "security",
+  "aliases": [],
+  "wiki": "Digital signature",
+  "path": null
+ },
+ {
+  "name": "certificate authority",
+  "category": "security",
+  "aliases": [
+   "ca",
+   "certificate"
+  ],
+  "wiki": "Certificate authority",
+  "path": null
+ },
+ {
+  "name": "diffie-hellman",
+  "category": "security",
+  "aliases": [
+   "diffie hellman",
+   "key exchange"
+  ],
+  "wiki": "Diffie\u2013Hellman key exchange",
+  "path": null
+ },
+ {
+  "name": "password hashing",
+  "category": "security",
+  "aliases": [
+   "bcrypt",
+   "salt"
+  ],
+  "wiki": "Key derivation function",
+  "path": null
+ },
+ {
+  "name": "oauth",
+  "category": "security",
+  "aliases": [
+   "oauth2"
+  ],
+  "wiki": "OAuth",
+  "path": null
+ },
+ {
+  "name": "jwt",
+  "category": "security",
+  "aliases": [
+   "json web token"
+  ],
+  "wiki": "JSON Web Token",
+  "path": null
+ },
+ {
+  "name": "cors",
+  "category": "security",
+  "aliases": [],
+  "wiki": "Cross-origin resource sharing",
+  "path": null
+ },
+ {
+  "name": "xss",
+  "category": "security",
+  "aliases": [
+   "cross-site scripting"
+  ],
+  "wiki": "Cross-site scripting",
+  "path": null
+ },
+ {
+  "name": "sql injection",
+  "category": "security",
+  "aliases": [],
+  "wiki": "SQL injection",
+  "path": null
+ },
+ {
+  "name": "csrf",
+  "category": "security",
+  "aliases": [
+   "cross-site request forgery"
+  ],
+  "wiki": "Cross-site request forgery",
+  "path": null
+ },
+ {
+  "name": "zero-knowledge proof",
+  "category": "security",
+  "aliases": [
+   "zero knowledge proof",
+   "zkp"
+  ],
+  "wiki": "Zero-knowledge proof",
+  "path": null
+ },
+ {
+  "name": "hmac",
+  "category": "security",
+  "aliases": [],
+  "wiki": "HMAC",
+  "path": null
+ },
+ {
+  "name": "man-in-the-middle",
+  "category": "security",
+  "aliases": [
+   "mitm"
+  ],
+  "wiki": "Man-in-the-middle attack",
+  "path": null
+ },
+ {
+  "name": "two-factor authentication",
+  "category": "security",
+  "aliases": [
+   "2fa",
+   "mfa"
+  ],
+  "wiki": "Multi-factor authentication",
+  "path": null
+ },
+ {
+  "name": "blockchain",
+  "category": "security",
+  "aliases": [],
+  "wiki": "Blockchain",
+  "path": null
+ },
+ {
+  "name": "proof of work",
+  "category": "security",
+  "aliases": [],
+  "wiki": "Proof of work",
+  "path": null
+ },
+ {
+  "name": "rest",
+  "category": "web",
+  "aliases": [
+   "rest api",
+   "restful"
+  ],
+  "wiki": "REST",
+  "path": null
+ },
+ {
+  "name": "graphql",
+  "category": "web",
+  "aliases": [],
+  "wiki": "GraphQL",
+  "path": null
+ },
+ {
+  "name": "grpc",
+  "category": "web",
+  "aliases": [],
+  "wiki": "gRPC",
+  "path": null
+ },
+ {
+  "name": "json",
+  "category": "web",
+  "aliases": [],
+  "wiki": "JSON",
+  "path": null
+ },
+ {
+  "name": "protobuf",
+  "category": "web",
+  "aliases": [
+   "protocol buffers"
+  ],
+  "wiki": "Protocol Buffers",
+  "path": null
+ },
+ {
+  "name": "dom",
+  "category": "web",
+  "aliases": [
+   "document object model"
+  ],
+  "wiki": "Document Object Model",
+  "path": null
+ },
+ {
+  "name": "event loop",
+  "category": "web",
+  "aliases": [],
+  "wiki": "Event loop",
+  "path": null
+ },
+ {
+  "name": "promise",
+  "category": "web",
+  "aliases": [
+   "async await",
+   "async"
+  ],
+  "wiki": "Futures and promises",
+  "path": null
+ },
+ {
+  "name": "virtual dom",
+  "category": "web",
+  "aliases": [],
+  "wiki": "Virtual DOM",
+  "path": null
+ },
+ {
+  "name": "server-side rendering",
+  "category": "web",
+  "aliases": [
+   "ssr"
+  ],
+  "wiki": "Server-side scripting",
+  "path": null
+ },
+ {
+  "name": "cookie",
+  "category": "web",
+  "aliases": [
+   "cookies"
+  ],
+  "wiki": "HTTP cookie",
+  "path": null
+ },
+ {
+  "name": "session",
+  "category": "web",
+  "aliases": [],
+  "wiki": "Session (computer science)",
+  "path": null
+ },
+ {
+  "name": "url",
+  "category": "web",
+  "aliases": [
+   "uri"
+  ],
+  "wiki": "URL",
+  "path": null
+ },
+ {
+  "name": "base64",
+  "category": "web",
+  "aliases": [],
+  "wiki": "Base64",
+  "path": null
+ },
+ {
+  "name": "unicode",
+  "category": "web",
+  "aliases": [
+   "utf-8",
+   "utf8"
+  ],
+  "wiki": "Unicode",
+  "path": null
+ },
+ {
+  "name": "compiler",
+  "category": "software",
+  "aliases": [],
+  "wiki": "Compiler",
+  "path": null
+ },
+ {
+  "name": "interpreter",
+  "category": "software",
+  "aliases": [],
+  "wiki": "Interpreter (computing)",
+  "path": null
+ },
+ {
+  "name": "just-in-time compilation",
+  "category": "software",
+  "aliases": [
+   "jit"
+  ],
+  "wiki": "Just-in-time compilation",
+  "path": null
+ },
+ {
+  "name": "abstract syntax tree",
+  "category": "software",
+  "aliases": [
+   "ast"
+  ],
+  "wiki": "Abstract syntax tree",
+  "path": null
+ },
+ {
+  "name": "bytecode",
+  "category": "software",
+  "aliases": [],
+  "wiki": "Bytecode",
+  "path": null
+ },
+ {
+  "name": "type system",
+  "category": "software",
+  "aliases": [
+   "static typing",
+   "type checking"
+  ],
+  "wiki": "Type system",
+  "path": null
+ },
+ {
+  "name": "closure",
+  "category": "software",
+  "aliases": [],
+  "wiki": "Closure (computer programming)",
+  "path": null
+ },
+ {
+  "name": "immutability",
+  "category": "software",
+  "aliases": [
+   "immutable"
+  ],
+  "wiki": "Immutable object",
+  "path": null
+ },
+ {
+  "name": "dependency injection",
+  "category": "software",
+  "aliases": [],
+  "wiki": "Dependency injection",
+  "path": null
+ },
+ {
+  "name": "pure function",
+  "category": "software",
+  "aliases": [],
+  "wiki": "Pure function",
+  "path": null
+ },
+ {
+  "name": "unit test",
+  "category": "software",
+  "aliases": [
+   "unit testing"
+  ],
+  "wiki": "Unit testing",
+  "path": null
+ },
+ {
+  "name": "version control",
+  "category": "software",
+  "aliases": [
+   "git"
+  ],
+  "wiki": "Version control",
+  "path": null
+ },
+ {
+  "name": "continuous integration",
+  "category": "software",
+  "aliases": [
+   "ci",
+   "ci/cd"
+  ],
+  "wiki": "Continuous integration",
+  "path": null
+ },
+ {
+  "name": "feature flag",
+  "category": "software",
+  "aliases": [
+   "feature toggle"
+  ],
+  "wiki": "Feature toggle",
+  "path": null
+ },
+ {
+  "name": "semantic versioning",
+  "category": "software",
+  "aliases": [
+   "semver"
+  ],
+  "wiki": "Software versioning",
+  "path": null
+ },
+ {
+  "name": "neural network",
+  "category": "machine learning",
+  "aliases": [
+   "neural networks"
+  ],
+  "wiki": "Neural network (machine learning)",
+  "path": null
+ },
+ {
+  "name": "gradient descent",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Gradient descent",
+  "path": null
+ },
+ {
+  "name": "backpropagation",
+  "category": "machine learning",
+  "aliases": [
+   "backprop"
+  ],
+  "wiki": "Backpropagation",
+  "path": null
+ },
+ {
+  "name": "overfitting",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Overfitting",
+  "path": null
+ },
+ {
+  "name": "transformer",
+  "category": "machine learning",
+  "aliases": [
+   "transformers"
+  ],
+  "wiki": "Transformer (deep learning architecture)",
+  "path": null
+ },
+ {
+  "name": "attention",
+  "category": "machine learning",
+  "aliases": [
+   "attention mechanism",
+   "self-attention"
+  ],
+  "wiki": "Attention (machine learning)",
+  "path": null
+ },
+ {
+  "name": "embedding",
+  "category": "machine learning",
+  "aliases": [
+   "embeddings",
+   "word embedding"
+  ],
+  "wiki": "Word embedding",
+  "path": null
+ },
+ {
+  "name": "tokenization",
+  "category": "machine learning",
+  "aliases": [
+   "tokenizer",
+   "bpe",
+   "byte pair encoding"
+  ],
+  "wiki": "Byte-pair encoding",
+  "path": null
+ },
+ {
+  "name": "large language model",
+  "category": "machine learning",
+  "aliases": [
+   "llm"
+  ],
+  "wiki": "Large language model",
+  "path": null
+ },
+ {
+  "name": "convolutional neural network",
+  "category": "machine learning",
+  "aliases": [
+   "cnn"
+  ],
+  "wiki": "Convolutional neural network",
+  "path": null
+ },
+ {
+  "name": "reinforcement learning",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Reinforcement learning",
+  "path": null
+ },
+ {
+  "name": "k-means",
+  "category": "machine learning",
+  "aliases": [
+   "kmeans",
+   "clustering"
+  ],
+  "wiki": "K-means clustering",
+  "path": null
+ },
+ {
+  "name": "decision tree",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Decision tree learning",
+  "path": null
+ },
+ {
+  "name": "random forest",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Random forest",
+  "path": null
+ },
+ {
+  "name": "linear regression",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Linear regression",
+  "path": null
+ },
+ {
+  "name": "logistic regression",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Logistic regression",
+  "path": null
+ },
+ {
+  "name": "cosine similarity",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Cosine similarity",
+  "path": null
+ },
+ {
+  "name": "vector database",
+  "category": "machine learning",
+  "aliases": [
+   "vector search"
+  ],
+  "wiki": "Vector database",
+  "path": null
+ },
+ {
+  "name": "nearest neighbor search",
+  "category": "machine learning",
+  "aliases": [
+   "knn",
+   "k-nearest neighbors"
+  ],
+  "wiki": "Nearest neighbor search",
+  "path": null
+ },
+ {
+  "name": "dropout",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Dilution (neural networks)",
+  "path": null
+ },
+ {
+  "name": "batch normalization",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Batch normalization",
+  "path": null
+ },
+ {
+  "name": "retrieval-augmented generation",
+  "category": "machine learning",
+  "aliases": [
+   "rag"
+  ],
+  "wiki": "Retrieval-augmented generation",
+  "path": null
+ },
+ {
+  "name": "diffusion model",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Diffusion model",
+  "path": null
+ },
+ {
+  "name": "perceptron",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Perceptron",
+  "path": null
+ },
+ {
+  "name": "bayes theorem",
+  "category": "machine learning",
+  "aliases": [
+   "bayes' theorem",
+   "bayesian"
+  ],
+  "wiki": "Bayes' theorem",
+  "path": null
+ },
+ {
+  "name": "entropy",
+  "category": "machine learning",
+  "aliases": [
+   "information entropy"
+  ],
+  "wiki": "Entropy (information theory)",
+  "path": null
+ },
+ {
+  "name": "softmax",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Softmax function",
+  "path": null
+ },
+ {
+  "name": "activation function",
+  "category": "machine learning",
+  "aliases": [
+   "relu",
+   "sigmoid"
+  ],
+  "wiki": "Activation function",
+  "path": null
+ },
+ {
+  "name": "loss function",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Loss function",
+  "path": null
+ },
+ {
+  "name": "cross-validation",
+  "category": "machine learning",
+  "aliases": [],
+  "wiki": "Cross-validation (statistics)",
+  "path": null
+ }
+]
