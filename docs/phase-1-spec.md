@@ -1,6 +1,6 @@
 # Phase 1 spec: explainers site, Bloom filter first
 
-Status: draft v5, audited for gaps, 2026-09-04. Nothing here is built. Lines added in the audit are marked (v5).
+Status: draft v5.1, repo named, 2026-09-04. Nothing here is built. Lines added in the audit are marked (v5).
 
 Vocabulary used throughout: **explainer** is one concept's page (v1 has one: Bloom filter). **Playground** is the interactive part of an explainer, the strip of bulbs and its boxes. **Site** is the thing at the GitHub Pages URL that will eventually hold several explainers.
 
@@ -41,7 +41,7 @@ Vocabulary used throughout: **explainer** is one concept's page (v1 has one: Blo
 
 The cheapest form of "scalable" that fits in 2 hours is a file layout and a set of conventions, not shared code. Proposed:
 
-- Each explainer lives in its own folder: `/bloom-filter/index.html`. The site root `/index.html` is the search landing (D27).
+- Each explainer lives in its own folder: `/tech-explainer/bloom-filter/index.html`. The site root `/tech-explainer/index.html` is the search landing (D27).
 - Each explainer folder carries its own `checks/` with the deploy checklist, hash vectors, and reader test. Site-level checks (landing, allowlist, 404) live in `/checks/`. (v5)
 - Each explainer has the same skeleton in the same order (link back to the landing, title, one framing sentence, playground, prose sections, numbered sources footer), so the second one is a copy with the middle swapped. Design 1 is the reference layout; design 8 is its variant.
 - No shared JS or CSS library in v1. Duplication across two explainers is acceptable; a framework built for one is not.
@@ -96,6 +96,7 @@ The cheapest form of "scalable" that fits in 2 hours is a file layout and a set 
 | D36 | (v5) The suggest dictionary is a fixed list of roughly 1,000 common English words embedded in the explainer. Its source and license are recorded in the sources footer | Default, source open (OQ-14) |
 | D37 | (v5) A `404.html` at the site root with one sentence and a link to the landing, so a mistyped URL is not a dead end either | Default |
 | D38 | (v5) Repository: MIT for code, CC BY 4.0 for prose and the allowlist | Default (OQ-16) |
+| D39 | Repo `tech-explainer`, site title "Tech explainer". Explainer URL `<user>.github.io/tech-explainer/bloom-filter/` | Decided |
 
 ## 7. Requirements, each with its check
 
@@ -122,7 +123,7 @@ The check column is the deploy checklist. Run it top to bottom before every push
 | R17 | Every allowlist entry resolves to a real, non-disambiguation Wikipedia article | Run `checks/verify_allowlist.py` on your machine (the sandbox cannot reach Wikipedia). Zero not-ok rows. Commit `checks/allowlist-verified.csv` with the date. Any not-ok entry is deleted from the list before deploy |
 | R18 | (v5) Both pages are keyboard operable and color is never the only channel (D34, D35) | Tab through the explainer with the mouse unplugged: seed, add, check, suggest, reset, every word chip. Enter submits. Focus ring visible. Grayscale the page (devtools rendering, or a screenshot desaturated): a query result is still readable from the ring and the verdict |
 | R19 | (v5) Input limits per D33 in both boxes, and an empty check does nothing | Add a 21-character word: refused with a note. Add "café" and an emoji word: accepted, 3 bulbs. Submit an empty check: nothing changes |
-| R20 | (v5) `404.html` renders on a wrong path and links to the landing | Open `/repo/nothing-here/` on the live site. One sentence and a working link back |
+| R20 | (v5) `404.html` renders on a wrong path and links to the landing | Open `/tech-explainer/nothing-here/` on the live site. One sentence and a working link back |
 | R21 | (v5) Reload resets state; nothing is stored | Seed, reload. Strip is dark. Devtools: Application tab shows no cookies, no local or session storage for the origin |
 
 Numbers behind D12, computed for 24 bulbs and 3 hashes from the standard occupancy estimate [2]:
@@ -185,7 +186,7 @@ Never cut: the false positive path (seed, query, suggest), the verdict asymmetry
 | OQ-14 | (v5) Source of the ~1,000 word suggest dictionary. Any word list carries a license and the footer has to say so | I pick a permissively licensed common-words list and record it. Veto |
 | OQ-15 | (v5) 24 words but only about 12 colors humans can tell apart. Cycle after 12, or lower the word cap to 12, which would also reopen D11 | Cycle after 12, keep the cap |
 | OQ-16 | (v5) Repo license. MIT for code and CC BY 4.0 for prose and allowlist is the usual pair | As stated |
-| OQ-17 | (v5) Repo name and site title. Both appear in the URL and on every page and neither has been chosen. Blocks R14 and R20 | You name it before build starts |
+| OQ-17 | Closed 2026-09-04: repo is `tech-explainer`, site title "Tech explainer", URL `<user>.github.io/tech-explainer/`. Now D39 | |
 
 OQ-1 through OQ-10 were accepted at their defaults on 2026-09-04 and are now Decided.
 

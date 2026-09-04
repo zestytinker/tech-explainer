@@ -1,6 +1,6 @@
-# Explainers
+# Tech explainer
 
-Build a tiny version of a hard idea, then break it. First concept: the Bloom filter.
+Build a tiny version of a hard tech idea, then break it. Lives at `<user>.github.io/tech-explainer/` once deployed. First concept: the Bloom filter.
 
 Status: spec and design phase. Nothing is deployed yet.
 
