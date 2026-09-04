@@ -53,12 +53,12 @@ sup{font-weight:600}
 <h1>Bloom<br>filter</h1>
 <div class="steps" id="steps"></div>
 
-<section class="page" id="problem">
+<section class="page" id="p-problem">
 <div class="origin"><h2>Why</h2>
 <p>Imagine a signup form on a site with a hundred million users. You type a name, and before you lift your finger it says: taken. It did not search a hundred million names in that instant. That list lives on slow disks somewhere else. Something much smaller answered first, something that fits in memory and only knows how to say two things: definitely not, or might be. If it says definitely not, the name is yours. If it says might be, only then does the real list get asked.</p>
 <p>That small something is a Bloom filter. It stays small because it is allowed to be wrong, in one direction only. Build one in eight clicks, then catch it being wrong.</p></div>
 </section>
-<section class="page" id="playground">
+<section class="page" id="p-playground">
 <h2>How</h2>
 <p class="lede">Add words, then ask about one you never added.</p>
 <div class="panel">
@@ -70,18 +70,18 @@ sup{font-weight:600}
 </div>
 
 </section>
-<section class="page" id="origin"><div class="origin"><h2>Origin story</h2>
+<section class="page" id="p-origin"><div class="origin"><h2>Origin story</h2>
 <p>In 1970 Burton Bloom was looking at a problem where checking a big list was expensive and being occasionally wrong in one direction was survivable. He showed you could shrink the list to a strip of bits if you accepted a small rate of false "yes" answers, and never a false "no".<sup>[1]</sup></p>
 <p>His worked example was a hyphenation program: most words follow simple rules, a few thousand need a lookup in a dictionary too big for memory. A small in-memory filter could say "definitely a simple word" for most input and send only the rest to the slow dictionary.<sup>[1]</sup></p></div></section>
 
-<section class="page" id="applications"><h2>Real-world applications</h2>
+<section class="page" id="p-applications"><h2>Real-world applications</h2>
 <p>The same shape shows up wherever a full lookup is expensive and a wrong "maybe" is cheap to catch.</p>
 <p><b>Databases that write files and never rewrite them.</b> Apache Cassandra keeps one filter per data file on disk, so a read for a row can skip every file whose filter says "definitely not". Operators tune the false-positive chance per table, trading memory for fewer wasted disk reads.<sup>[3]</sup> RocksDB does the same: each file gets a filter built when the file is written, and a lookup consults the filter before opening the file.<sup>[4]</sup></p>
 <p><b>The Bigtable paper.</b> Google's 2006 paper on Bigtable described attaching a Bloom filter to each of its immutable data files to avoid disk seeks for rows that aren't there. Many later systems of this kind inherited the idea from it.<sup>[5]</sup></p>
 <p><b>Bitcoin light clients, and a warning.</b> For years, lightweight Bitcoin wallets sent a Bloom filter of their addresses to full nodes, which replied with only the transactions that "might be" theirs. In 2019 Bitcoin Core disabled serving those filters by default, calling them a well-known denial-of-service target. The lesson travels: "might be" is cheap for the asker and can be expensive for whoever has to answer.<sup>[6]</sup></p>
 </section>
 
-<section class="page" id="further"><h2>Read further</h2>
+<section class="page" id="p-further"><h2>Read further</h2>
 <ol class="links">
 <li>The 1970 paper. Four pages, readable without a mathematics background for the first half.<sup>[1]</sup></li>
 <li>Broder and Mitzenmacher's 2004 survey, where the sizing formulas on this site come from.<sup>[2]</sup></li>
@@ -122,14 +122,14 @@ const stepsEl=document.getElementById('steps');
 pages.forEach((p,j)=>{const b=document.createElement('button');b.textContent=(j+1)+'. '+names[j];b.onclick=()=>location.hash=p;stepsEl.appendChild(b);});
 function show(){let i=pages.indexOf(location.hash.slice(1));if(i<0)i=0;
  [...stepsEl.children].forEach((b,j)=>b.classList.toggle('cur',j===i));
- pages.forEach((p,j)=>document.getElementById(p).classList.toggle('cur',j===i));
+ pages.forEach((p,j)=>document.getElementById('p-'+p).classList.toggle('cur',j===i));
  document.getElementById('where').textContent=(i+1)+' of 5: '+names[i];
  document.getElementById('next').textContent=i===0?'Next: build it':'Next';
  document.getElementById('prev').classList.toggle('hidden',i===0);
  document.getElementById('next').classList.toggle('hidden',i===4);
  document.getElementById('prev').onclick=()=>location.hash=pages[i-1];
  document.getElementById('next').onclick=()=>location.hash=pages[i+1];
- setTimeout(()=>window.scrollTo(0,0),0);}
+ window.scrollTo(0,0);}
 addEventListener('hashchange',show);show();
 </script>
 </body></html>
