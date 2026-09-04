@@ -1,6 +1,6 @@
 # Phase 1 spec: explainers site, Bloom filter first
 
-Status: v7, built, 2026-09-04. Build ran 22:46 to 23:03 by commit timestamps (about 17 minutes of wall clock after the go; content and sourcing were done ahead). Nothing cut from the cut order. Nothing here is built. Lines added in the audit are marked (v5).
+Status: v7.1, repainted, 2026-09-04. Build ran 22:46 to 23:03 by commit timestamps (about 17 minutes of wall clock after the go; content and sourcing were done ahead). Nothing cut from the cut order. Nothing here is built. Lines added in the audit are marked (v5).
 
 Vocabulary used throughout: **explainer** is one concept's page (v1 has one: Bloom filter). **Playground** is the interactive part of an explainer, the strip of bulbs and its boxes. **Site** is the thing at the GitHub Pages URL that will eventually hold several explainers.
 
@@ -98,6 +98,8 @@ The cheapest form of "scalable" that fits in 2 hours is a file layout and a set 
 | D38 | (v5) Repository: MIT for code, CC BY 4.0 for prose and the allowlist | Default (OQ-16) |
 | D39 | Repo `tech-explainer`, site title "Tech explainer". Explainer URL `<user>.github.io/tech-explainer/bloom-filter/` | Decided |
 | D40 | The explainer is five pages in a fixed order: 1 Why (hook story), 2 How (playground), 3 Origin story, 4 Real-world applications, 5 Read further. Prev and Next move between them; on page 1 the Next button reads "Next: build it". The playground page is complete on its own; the reviewer path (R13) is one click from page 1, then never leaves page 2. Revised 2026-09-04 from four pages | Decided |
+| D46 | Palette per section 11a. Repaint 2026-09-04 | Decided |
+| D47 | Each verdict carries a one-line reason naming the bulbs, not the words. Softens D7 | Default, veto to revert |
 | D45 | Five step buttons sit under the title on every page, labelled "1. Why", "2. How", "3. Origin story", "4. Real-world applications", "5. Read further". The current page is filled black. Each jumps to its page; Prev/Next at the bottom stay. Below 480 px only the current button shows its name, the rest show their number, so the playground stays above the fold (R1). Added at build, veto if you want full labels on phones | Decided (phone variant Default) |
 | D44 | The hook story is a hypothetical (a signup form on an unnamed site), so it carries no factual claim and no source. Text is in `content/bloom-filter-pages.md` | Decided |
 | D41 | The five pages are sections of one `index.html`, switched by URL hash (`#problem`, `#playground`, `#origin`, `#applications`, `#further`). Every page is deep-linkable and Prev/Next are instant | Default (OQ-18) |
@@ -202,6 +204,23 @@ Never cut: the false positive path (seed, query, suggest), the verdict asymmetry
 | OQ-17 | Closed 2026-09-04: repo is `tech-explainer`, site title "Tech explainer", URL `<user>.github.io/tech-explainer/`. Now D39 | |
 
 OQ-1 through OQ-10 were accepted at their defaults on 2026-09-04 and are now Decided.
+
+## 11a. Palette (D46, 2026-09-04)
+
+| Token | Value | Where it may appear |
+|---|---|---|
+| ink | #2B2721 | All structure and type. Warm dark, never pure black |
+| ink-soft | #5C5548 | Secondary type: notes, sources, pager label |
+| butter | #FFEFB8 | Page ground, nothing else |
+| paper | #FDFAF1 | Panels, buttons, dropdown. White (#fff) for text fields only |
+| bulb | #FFC93C | Exactly one button per visible page: the next thing worth doing |
+| berry | #B3325B | "Might be in the set", and focus rings |
+| mint | #1F8A70 | "Definitely not in the set", and the "built" tag on the landing |
+| 12 word colours | muted earth, forest, violet, ochre | Word chips and the bulbs they lit. No blue. Kept clear of berry and mint so those two keep their meaning |
+
+Rules: berry and mint never decorate, they only carry the verdict asymmetry and availability. Bulb yellow is never used twice on one visible page; the primary moves as the reader progresses (empty → Seed, seeded → Suggest, word typed → Check, after a verdict → none, page 1 → Next: build it). Unlit bulbs are #E7E0CB so an empty strip still reads as slots rather than blank paper.
+
+Also added at repaint: each verdict carries a one-line reason ("All three bulbs it checked were already on" / "Bulb 12 was dark, so nothing ever lit it"). This softens D7, which said bulbs only. The reason states which bulbs, not which words, so the reader still has to hover the chips to find the culprits. Veto if you want D7 kept strictly.
 
 ## 11b. Build record (v7)
 

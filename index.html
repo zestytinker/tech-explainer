@@ -3,29 +3,29 @@
 <title>Tech explainer</title>
 <meta name="description" content="Build a tiny version of a hard tech idea, then break it.">
 <style>
-:root{--ink:#1a1a1a;--paper:#FFE566;--panel:#fff;--grey:#E9E9E9;--pink:#FF4D9D;--shadow:6px 6px 0 var(--ink)}
+:root{--ink:#2B2721;--ink-soft:#5C5548;--butter:#FFEFB8;--paper:#FDFAF1;--bulb:#FFC93C;--berry:#B3325B;--mint:#1F8A70;--shadow:6px 6px 0 var(--ink)}
 *{box-sizing:border-box}
-html{background:var(--paper)}
-body{margin:0;color:var(--ink);font:17px/1.6 "Avenir Next","Segoe UI","Helvetica Neue",system-ui,sans-serif;max-width:920px;padding:28px 20px 60px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+html{background:var(--butter)}
+body{margin:0;color:var(--ink);font:17px/1.65 "Avenir Next","Segoe UI","Helvetica Neue",system-ui,sans-serif;max-width:920px;padding:28px 20px 60px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
 h1{font-size:clamp(36px,7vw,64px);line-height:1.05;letter-spacing:-.01em;font-weight:700;margin:0 0 28px;max-width:11em}
 .search{position:relative;max-width:640px}
-input{width:100%;font-family:inherit;font-size:24px;font-weight:500;line-height:1.2;padding:16px 20px;border:4px solid var(--ink);background:var(--grey);box-shadow:var(--shadow)}
+input{width:100%;font-family:inherit;font-size:24px;font-weight:500;line-height:1.2;padding:16px 20px;border:4px solid var(--ink);background:#fff;box-shadow:var(--shadow)}
 input:focus{outline:none;background:#fff}
-input:focus-visible{outline:4px solid var(--pink);outline-offset:2px}
-input::placeholder{color:#666;font-weight:400}
-.drop{margin-top:14px;border:4px solid var(--ink);background:var(--grey);box-shadow:var(--shadow);display:none}
+input:focus-visible{outline:4px solid var(--berry);outline-offset:2px}
+input::placeholder{color:#8B8271;font-weight:400}
+.drop{margin-top:14px;border:4px solid var(--ink);background:var(--paper);box-shadow:var(--shadow);display:none}
 .drop.show{display:block}
 .item{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:3px solid var(--ink);font-weight:600;font-size:20px;text-decoration:none;color:var(--ink);gap:12px}
 .item:last-child{border-bottom:0}
-a.item:hover,a.item:focus,.item.sel{background:var(--ink);color:#fff;outline:none}
-.item.plain{cursor:default;font-weight:500}
-.tag{font-size:13px;font-weight:600;border:3px solid var(--ink);padding:2px 8px;background:var(--pink);color:#fff;white-space:nowrap}
-.tag.off{background:var(--panel);color:var(--ink)}
-.hint{padding:12px 16px;font-weight:400;color:#333;background:#f5f5f5}
-.msg{padding:14px 16px;background:var(--panel)}
+a.item:hover,a.item:focus,.item.sel{background:var(--ink);color:var(--butter);outline:none}
+.item.plain{cursor:default;font-weight:500;color:var(--ink-soft)}
+.tag{font-size:13px;font-weight:600;border:3px solid var(--ink);padding:2px 8px;background:var(--mint);color:#fff;white-space:nowrap}
+.tag.off{background:transparent;color:var(--ink-soft);border-color:var(--ink-soft)}
+.hint{padding:12px 16px;font-weight:400;color:var(--ink-soft);background:#F6F1E2}
+.msg{padding:14px 16px;background:#fff}
 .msg b{display:block;margin-bottom:6px}
-.msg a{display:inline-block;border:3px solid var(--ink);padding:3px 10px;text-decoration:none;font-weight:600;background:var(--paper);box-shadow:3px 3px 0 var(--ink);margin:4px 8px 0 0}
-.foot{margin-top:60px;font-size:14px}
+.msg a{display:inline-block;border:3px solid var(--ink);padding:3px 10px;text-decoration:none;font-weight:600;background:var(--bulb);box-shadow:3px 3px 0 var(--ink);margin:4px 8px 0 0}
+.foot{margin-top:60px;font-size:14px;color:var(--ink-soft)}
 .foot a{color:var(--ink)}
 </style></head><body>
 <h1>What do you want to understand?</h1>
