@@ -1,6 +1,6 @@
 # Phase 1 spec: explainers site, Bloom filter first
 
-Status: draft v6, four-page explainer, 2026-09-04. Nothing here is built. Lines added in the audit are marked (v5).
+Status: draft v6.1, hook page added, 2026-09-04. Nothing here is built. Lines added in the audit are marked (v5).
 
 Vocabulary used throughout: **explainer** is one concept's page (v1 has one: Bloom filter). **Playground** is the interactive part of an explainer, the strip of bulbs and its boxes. **Site** is the thing at the GitHub Pages URL that will eventually hold several explainers.
 
@@ -97,8 +97,9 @@ The cheapest form of "scalable" that fits in 2 hours is a file layout and a set 
 | D37 | Dropped 2026-09-04: no `404.html` in v1. A mistyped URL shows GitHub's default 404 | Dropped |
 | D38 | (v5) Repository: MIT for code, CC BY 4.0 for prose and the allowlist | Default (OQ-16) |
 | D39 | Repo `tech-explainer`, site title "Tech explainer". Explainer URL `<user>.github.io/tech-explainer/bloom-filter/` | Decided |
-| D40 | The explainer is four pages in a fixed order: 1 Playground, 2 Origin story, 3 Real-world applications, 4 Read further. Prev and Next buttons move between them. Page 1 is complete on its own; the reviewer path (R13) never leaves it | Decided |
-| D41 | The four pages are sections of one `index.html`, switched by URL hash (`#origin`, `#applications`, `#further`). Every page is deep-linkable and Prev/Next are instant | Default (OQ-18) |
+| D40 | The explainer is five pages in a fixed order: 1 The problem (hook story), 2 Playground, 3 Origin story, 4 Real-world applications, 5 Read further. Prev and Next move between them; on page 1 the Next button reads "Next: build it". The playground page is complete on its own; the reviewer path (R13) is one click from page 1, then never leaves page 2. Revised 2026-09-04 from four pages | Decided |
+| D44 | The hook story is a hypothetical (a signup form on an unnamed site), so it carries no factual claim and no source. Text is in `content/bloom-filter-pages.md` | Decided |
+| D41 | The five pages are sections of one `index.html`, switched by URL hash (`#problem`, `#playground`, `#origin`, `#applications`, `#further`). Every page is deep-linkable and Prev/Next are instant | Default (OQ-18) |
 | D42 | Page 3 content is final and sourced in `content/bloom-filter-pages.md` (Cassandra, RocksDB, Bigtable paper, Bitcoin Core PR #16152), verified 2026-09-04. Chrome Safe Browsing excluded, no primary source for a present-tense claim. R23 re-checks the four links on deploy day | Decided |
 | D43 | Page 4 is a short list of links: the 1970 paper, the 2004 survey, the Wikipedia article, and the page 3 sources. Every link is also a source, so R12 covers it | Default |
 
@@ -120,7 +121,7 @@ The check column is the deploy checklist. Run it top to bottom before every push
 | R10 | A bulb lit by more than one word shows the first word's color; hovering any of its words highlights it | Find a shared bulb in the seed pattern (recorded in `checks/seed-pattern.txt`). Hover both words. Both highlight it |
 | R11 | Reset returns to R1 state | Click reset after R6. Strip dark, list empty, add enabled |
 | R12 | Every factual sentence on the page has a numbered source link in the footer that resolves | Open every footer link. Each loads. Each sentence's number matches a link. Zero unnumbered factual sentences (see section 8 for what counts) |
-| R13 | A reviewer can complete the path seed, query, suggest, query, hover, reset in under 60 seconds with no instructions | Hand the URL to one person who has not seen it. Time them. Do not speak |
+| R13 | A reviewer landing on page 1 can click through to the playground and complete seed, query, suggest, query, hover, reset in under 60 seconds with no instructions | Hand the URL to one person who has not seen it. Time them. Do not speak |
 | R14 | Works on GitHub Pages at the project URL with no console errors | Open the live URL, open devtools console. Zero errors. Repeat R2 and R8 on the live page |
 | R15 | Landing search per D27: focus shows built explainers plus a type prompt; matches appear while typing, built first; full match on a built name opens `/bloom-filter/`; an allowlisted name with no page gives "real concept, no explainer here yet" plus links to built ones; anything else gives "not supported" plus the same links. Works with network off | Focus empty box: built names and the prompt, nothing else. Type "bloom filter": page opens. Type "merkle tree", "hash map" (alias), "arrays" (plural): real-concept message plus a link to Bloom. Type gibberish, empty, 200 chars, an emoji: not supported plus the same link, zero console errors. Repeat everything with network off |
 | R16 | Adding a second explainer means one allowlist entry gets a path and one folder is added, nothing else | Dry run: give a stub entry a path and add an empty `/second/index.html`. Dropdown and match update. Confirm nothing in `/bloom-filter/` was edited. Delete the stub |
@@ -128,7 +129,7 @@ The check column is the deploy checklist. Run it top to bottom before every push
 | R18 | (v5) Both pages are keyboard operable and color is never the only channel (D34, D35) | Tab through the explainer with the mouse unplugged: seed, add, check, suggest, reset, every word chip. Enter submits. Focus ring visible. Grayscale the page (devtools rendering, or a screenshot desaturated): a query result is still readable from the ring and the verdict |
 | R19 | (v5) Input limits per D33 in both boxes, and an empty check does nothing | Add a 21-character word: refused with a note. Add "café" and an emoji word: accepted, 3 bulbs. Submit an empty check: nothing changes |
 | R20 | Dropped with D37 | |
-| R22 | Prev/Next move through the four pages in order; Prev is absent on page 1 and Next on page 4; the browser back button and a direct link to `#applications` both land on the right page | Click through 1 to 4 and back. Reload on `#origin` shows Origin story. Open `#further` in a fresh tab. Back button returns to the previous page, not out of the site |
+| R22 | Prev/Next move through the five pages in order; Prev is absent on page 1 and Next on page 5; page 1's Next reads "Next: build it"; the browser back button and a direct link to `#applications` both land on the right page | Click through 1 to 5 and back. Reload on `#origin` shows Origin story. Open `#further` in a fresh tab. Back button returns to the previous page, not out of the site |
 | R23 | Every system named on page 3 links to that system's own documentation or the original paper, and the claim matches what that source says today | On deploy day, open each source and read the sentence that supports the claim. Record the URL and date in the commit message. A claim without a matching sentence is removed |
 | R21 | (v5) Reload resets state; nothing is stored | Seed, reload. Strip is dark. Devtools: Application tab shows no cookies, no local or session storage for the origin |
 
@@ -172,18 +173,18 @@ Decided (D25). Deferred before the build started, 2026-09-04: the `checks/` fold
 
 Cut from the bottom of this list first:
 
-0. Page 3, Real-world applications (D42). Highest verification cost. If cut, Next goes from Origin story straight to Read further.
+0. Page 4, Real-world applications (D42). Highest verification cost. If cut, Next goes from Origin story straight to Read further.
 1. The landing's typeahead and dropdown (part of R15). Fall back to a plain list of built names with the same three messages on submit. The not-yet and not-supported states are never cut; a dead end on the front door fails goal 2.
 2. Touch tap-to-highlight (D18). Reviewers on phones lose hover; everything else works.
 3. The suggest button's "add more words first" state. Replace with the button simply doing nothing below 3 words.
-4. The Origin story page.
+4. The Origin story page. The hook page (D44) is never cut; it costs five minutes and is the reader's reason to click.
 5. Distinct colors per word, replaced by one "on" color. This breaks D7 and needs your OK.
 
 Never cut: R18 keyboard operability. (The 404 page was dropped from scope on 2026-09-04, not cut.)
 
 Never cut: the false positive path (seed, query, suggest), the verdict asymmetry, R12.
 
-(v6) Budget note, honest version: playground page about 70 min, pages 2 to 4 about 20 (page 3 was sourced and written ahead of the build on 2026-09-04), landing with typeahead about 25, deploy about 10. That is 125 minutes against 120; the cut order is still expected to be used.
+(v6) Budget note, honest version: playground page about 70 min, the other four pages about 25 (page 3 was sourced and written ahead of the build on 2026-09-04), landing with typeahead about 25, deploy about 10. That is 130 minutes against 120; the cut order is still expected to be used.
 
 ## 11. Open questions
 

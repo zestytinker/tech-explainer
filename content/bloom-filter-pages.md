@@ -1,8 +1,16 @@
-# Bloom filter explainer: pages 2 to 4, sourced
+# Bloom filter explainer: pages 1, 3, 4, 5 (page 2 is the playground)
 
-Verified 2026-09-04. Each claim carries the source number from the footer and the sentence in the source that supports it. Page 3 claims are the ones that go stale; re-check them whenever the page is touched (R23).
+Verified 2026-09-04. Each claim carries the source number from the footer and the sentence in the source that supports it. Page 4 claims are the ones that go stale; re-check them whenever the page is touched (R23).
 
-## Page 2: Origin story
+## Page 1: The problem (hook, no sources needed: hypothetical)
+
+Imagine a signup form on a site with a hundred million users. You type a name, and before you lift your finger it says: taken. It did not search a hundred million names in that instant. That list lives on slow disks somewhere else. Something much smaller answered first, something that fits in memory and only knows how to say two things: definitely not, or might be. If it says definitely not, the name is yours. If it says might be, only then does the real list get asked.
+
+That small something is a Bloom filter. It stays small because it is allowed to be wrong, in one direction only. Build one in eight clicks, then catch it being wrong.
+
+Button: Next: build it
+
+## Page 3: Origin story
 
 In 1970 Burton Bloom was looking at a problem where checking a big list was expensive and being occasionally wrong in one direction was survivable. He showed you could shrink the list to a strip of bits if you accepted a small rate of false "yes" answers, and never a false "no". [1]
 
@@ -10,7 +18,7 @@ His worked example was hyphenation: most words follow simple rules, a minority n
 
 Verification: [1] abstract confirmed via the ACM record (13(7):422–426, doi 10.1145/362686.362692): "allowing a small number of test messages to be falsely identified as members of the given set will permit a much smaller hash area to be used". The hyphenation example is in the paper body, not the abstract; **confirm against the paper text on build day** before the second paragraph ships. If not confirmed, ship the first paragraph only.
 
-## Page 3: Real-world applications
+## Page 4: Real-world applications
 
 The same shape shows up wherever a full lookup is expensive and a wrong "maybe" is cheap to catch.
 
@@ -28,7 +36,7 @@ Verification record:
 
 Excluded: Chrome Safe Browsing. The commonly cited Bloom filter mechanism is historical and current documentation does not describe it that way; no primary source found that supports a present-tense claim.
 
-## Page 4: Read further
+## Page 5: Read further
 
 1. The 1970 paper. Four pages, readable without a mathematics background for the first half. [1]
 2. Broder and Mitzenmacher's 2004 survey, where the sizing formulas on this site come from. [2]
