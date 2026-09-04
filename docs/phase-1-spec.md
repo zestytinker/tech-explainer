@@ -99,7 +99,7 @@ The cheapest form of "scalable" that fits in 2 hours is a file layout and a set 
 | D39 | Repo `tech-explainer`, site title "Tech explainer". Explainer URL `<user>.github.io/tech-explainer/bloom-filter/` | Decided |
 | D40 | The explainer is four pages in a fixed order: 1 Playground, 2 Origin story, 3 Real-world applications, 4 Read further. Prev and Next buttons move between them. Page 1 is complete on its own; the reviewer path (R13) never leaves it | Decided |
 | D41 | The four pages are sections of one `index.html`, switched by URL hash (`#origin`, `#applications`, `#further`). Every page is deep-linkable and Prev/Next are instant | Default (OQ-18) |
-| D42 | Page 3 names three systems, each sourced to that system's own documentation or the original paper. Candidates: Apache Cassandra, RocksDB, the Bigtable paper, Bitcoin BIP 37. Chrome Safe Browsing is excluded: its current mechanism is not the one the popular articles describe | Default (OQ-19) |
+| D42 | Page 3 content is final and sourced in `content/bloom-filter-pages.md` (Cassandra, RocksDB, Bigtable paper, Bitcoin Core PR #16152), verified 2026-09-04. Chrome Safe Browsing excluded, no primary source for a present-tense claim. R23 re-checks the four links on deploy day | Decided |
 | D43 | Page 4 is a short list of links: the 1970 paper, the 2004 survey, the Wikipedia article, and the page 3 sources. Every link is also a source, so R12 covers it | Default |
 
 ## 7. Requirements, each with its check
@@ -183,7 +183,7 @@ Never cut: R18 keyboard operability. (The 404 page was dropped from scope on 202
 
 Never cut: the false positive path (seed, query, suggest), the verdict asymmetry, R12.
 
-(v6) Budget note, honest version: playground page about 70 min, pages 2 to 4 about 40 (20 of it sourcing page 3), landing with typeahead about 25, deploy about 10. That is 145 minutes against 120 before anything goes wrong; item 0 in the cut order is the likely casualty.
+(v6) Budget note, honest version: playground page about 70 min, pages 2 to 4 about 20 (page 3 was sourced and written ahead of the build on 2026-09-04), landing with typeahead about 25, deploy about 10. That is 125 minutes against 120; the cut order is still expected to be used.
 
 ## 11. Open questions
 
@@ -195,7 +195,7 @@ Never cut: the false positive path (seed, query, suggest), the verdict asymmetry
 | OQ-14 | (v5) Source of the ~1,000 word suggest dictionary. Any word list carries a license and the footer has to say so | I pick a permissively licensed common-words list and record it. Veto |
 | OQ-15 | (v5) 24 words but only about 12 colors humans can tell apart. Cycle after 12, or lower the word cap to 12, which would also reopen D11 | Cycle after 12, keep the cap |
 | OQ-18 | Page switching: hash sections in one file (instant, one file, deep-linkable) or four HTML files (works with JS off, four files to keep in step) | Hash sections in one file |
-| OQ-19 | Which three systems on page 3 | Cassandra, RocksDB, Bigtable paper. BIP 37 as a fourth only if time allows, as the "and sometimes it gets removed" example |
+| OQ-19 | Closed: page 3 written and sourced, see D42 | |
 | OQ-16 | (v5) Repo license. MIT for code and CC BY 4.0 for prose and allowlist is the usual pair | As stated |
 | OQ-17 | Closed 2026-09-04: repo is `tech-explainer`, site title "Tech explainer", URL `<user>.github.io/tech-explainer/`. Now D39 | |
 
