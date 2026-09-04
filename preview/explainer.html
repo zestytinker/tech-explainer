@@ -129,7 +129,7 @@ function show(){let i=pages.indexOf(location.hash.slice(1));if(i<0)i=0;
  document.getElementById('next').classList.toggle('hidden',i===4);
  document.getElementById('prev').onclick=()=>location.hash=pages[i-1];
  document.getElementById('next').onclick=()=>location.hash=pages[i+1];
- window.scrollTo(0,0);}
+ setTimeout(()=>window.scrollTo(0,0),0);}
 addEventListener('hashchange',show);show();
 </script>
 </body></html>
