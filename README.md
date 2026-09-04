@@ -2,7 +2,7 @@
 
 Build a tiny version of a hard tech idea, then break it. Live at https://zestytinker.github.io/tech-explainer/ First concept: the Bloom filter.
 
-Status: spec and design phase. The site is up with a placeholder; the explainer is not built yet.
+Status: built, awaiting the live checks (see docs/phase-1-spec.md section 11b). Landing at `/`, explainer at `/bloom-filter/`.
 
 - `docs/phase-1-spec.md`: the spec. Every requirement has its check; every decision is logged.
 - `designs/`: eight low-fidelity layout explorations with rationale, trade-off and checks each. `designs/README.md` has the comparison and recommendation.

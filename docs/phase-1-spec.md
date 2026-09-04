@@ -1,6 +1,6 @@
 # Phase 1 spec: explainers site, Bloom filter first
 
-Status: draft v6.2, step buttons, 2026-09-04. Nothing here is built. Lines added in the audit are marked (v5).
+Status: v7, built, 2026-09-04. Build ran 22:46 to 23:03 by commit timestamps (about 17 minutes of wall clock after the go; content and sourcing were done ahead). Nothing cut from the cut order. Nothing here is built. Lines added in the audit are marked (v5).
 
 Vocabulary used throughout: **explainer** is one concept's page (v1 has one: Bloom filter). **Playground** is the interactive part of an explainer, the strip of bulbs and its boxes. **Site** is the thing at the GitHub Pages URL that will eventually hold several explainers.
 
@@ -98,7 +98,7 @@ The cheapest form of "scalable" that fits in 2 hours is a file layout and a set 
 | D38 | (v5) Repository: MIT for code, CC BY 4.0 for prose and the allowlist | Default (OQ-16) |
 | D39 | Repo `tech-explainer`, site title "Tech explainer". Explainer URL `<user>.github.io/tech-explainer/bloom-filter/` | Decided |
 | D40 | The explainer is five pages in a fixed order: 1 Why (hook story), 2 How (playground), 3 Origin story, 4 Real-world applications, 5 Read further. Prev and Next move between them; on page 1 the Next button reads "Next: build it". The playground page is complete on its own; the reviewer path (R13) is one click from page 1, then never leaves page 2. Revised 2026-09-04 from four pages | Decided |
-| D45 | Five step buttons sit under the title on every page, labelled "1. Why", "2. How", "3. Origin story", "4. Real-world applications", "5. Read further". The current page is filled black. Each jumps to its page; Prev/Next at the bottom stay | Decided |
+| D45 | Five step buttons sit under the title on every page, labelled "1. Why", "2. How", "3. Origin story", "4. Real-world applications", "5. Read further". The current page is filled black. Each jumps to its page; Prev/Next at the bottom stay. Below 480 px only the current button shows its name, the rest show their number, so the playground stays above the fold (R1). Added at build, veto if you want full labels on phones | Decided (phone variant Default) |
 | D44 | The hook story is a hypothetical (a signup form on an unnamed site), so it carries no factual claim and no source. Text is in `content/bloom-filter-pages.md` | Decided |
 | D41 | The five pages are sections of one `index.html`, switched by URL hash (`#problem`, `#playground`, `#origin`, `#applications`, `#further`). Every page is deep-linkable and Prev/Next are instant | Default (OQ-18) |
 | D42 | Page 3 content is final and sourced in `content/bloom-filter-pages.md` (Cassandra, RocksDB, Bigtable paper, Bitcoin Core PR #16152), verified 2026-09-04. Chrome Safe Browsing excluded, no primary source for a present-tense claim. R23 re-checks the four links on deploy day | Decided |
@@ -191,10 +191,10 @@ Never cut: the false positive path (seed, query, suggest), the verdict asymmetry
 
 | ID | Question | Default if you say nothing |
 |---|---|---|
-| OQ-11 | "A match will open the page" while typing. Opening on every partial match would yank the reader away mid-keystroke, so I read it as: full match on a name or alias opens immediately, partial match highlights and waits for Enter | Full match opens, partial waits |
+| OQ-11 | Closed at build as the default (full match opens, partial waits). Was: "A match will open the page" while typing. Opening on every partial match would yank the reader away mid-keystroke, so I read it as: full match on a name or alias opens immediately, partial match highlights and waits for Enter | Full match opens, partial waits |
 | OQ-12 | The 207 entries in `content/allowlist.py` are my draft. Categories, aliases and Wikipedia titles are all mine | Ship as drafted after R17 passes. Veto entries or categories |
-| OQ-13 | Matching tolerance. Exact after lowercase and trim is cheapest; plurals and aliases are in the list; typo tolerance (one edit) costs another 10 minutes | Lowercase, trim, drop trailing s, aliases. No typo tolerance in v1 |
-| OQ-14 | (v5) Source of the ~1,000 word suggest dictionary. Any word list carries a license and the footer has to say so | I pick a permissively licensed common-words list and record it. Veto |
+| OQ-13 | Closed at build: lowercase, trim, collapse spaces, drop trailing s, aliases, prefix and substring matching for the dropdown. No typo tolerance | |
+| OQ-14 | Closed at build: 3,096 words, SCOWL most-common tier (Copyright 2000–2016 Kevin Atkinson, permissive with attribution) via the MIT `wordlist-english` npm package. Attribution in the explainer footer. D36 count revised from ~1,000 | |
 | OQ-15 | (v5) 24 words but only about 12 colors humans can tell apart. Cycle after 12, or lower the word cap to 12, which would also reopen D11 | Cycle after 12, keep the cap |
 | OQ-18 | Page switching: hash sections in one file (instant, one file, deep-linkable) or four HTML files (works with JS off, four files to keep in step) | Hash sections in one file |
 | OQ-19 | Closed: page 3 written and sourced, see D42 | |
@@ -202,6 +202,17 @@ Never cut: the false positive path (seed, query, suggest), the verdict asymmetry
 | OQ-17 | Closed 2026-09-04: repo is `tech-explainer`, site title "Tech explainer", URL `<user>.github.io/tech-explainer/`. Now D39 | |
 
 OQ-1 through OQ-10 were accepted at their defaults on 2026-09-04 and are now Decided.
+
+## 11b. Build record (v7)
+
+Built 2026-09-04. Both pages are single files with no external requests. Checks are recorded in the two build commit messages (`git log`), per the deferral of the checks folders.
+
+Still open after the build, all needing a person or a machine this sandbox does not have:
+- R4 in Firefox and Safari (vectors in the explainer commit message).
+- R13 and definition-of-done item 2: one cold reader, timed, answer recorded verbatim.
+- R14 on the live URL (local run was clean apart from Chromium's own file:// listing script).
+- R17: run `checks/verify_allowlist.py`; delete any not-ok entries and rebuild `index.html` by re-running the landing generator (or ask me).
+- R23: re-open the four page-4 links on deploy day.
 
 ## 12. Sources
 
