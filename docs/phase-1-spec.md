@@ -1,6 +1,6 @@
 # Phase 1 spec: explainers site, Bloom filter first
 
-Status: draft v5.1, repo named, 2026-09-04. Nothing here is built. Lines added in the audit are marked (v5).
+Status: draft v5.2, 404 dropped, 2026-09-04. Nothing here is built. Lines added in the audit are marked (v5).
 
 Vocabulary used throughout: **explainer** is one concept's page (v1 has one: Bloom filter). **Playground** is the interactive part of an explainer, the strip of bulbs and its boxes. **Site** is the thing at the GitHub Pages URL that will eventually hold several explainers.
 
@@ -42,7 +42,7 @@ Vocabulary used throughout: **explainer** is one concept's page (v1 has one: Blo
 The cheapest form of "scalable" that fits in 2 hours is a file layout and a set of conventions, not shared code. Proposed:
 
 - Each explainer lives in its own folder: `/tech-explainer/bloom-filter/index.html`. The site root `/tech-explainer/index.html` is the search landing (D27).
-- Each explainer folder carries its own `checks/` with the deploy checklist, hash vectors, and reader test. Site-level checks (landing, allowlist, 404) live in `/checks/`. (v5)
+- Each explainer folder carries its own `checks/` with the deploy checklist, hash vectors, and reader test. Site-level checks (landing, allowlist) live in `/checks/`. (v5)
 - Each explainer has the same skeleton in the same order (link back to the landing, title, one framing sentence, playground, prose sections, numbered sources footer), so the second one is a copy with the middle swapped. Design 1 is the reference layout; design 8 is its variant.
 - No shared JS or CSS library in v1. Duplication across two explainers is acceptable; a framework built for one is not.
 - Sources footer format is identical across explainers so R12's check is reusable verbatim.
@@ -94,7 +94,7 @@ The cheapest form of "scalable" that fits in 2 hours is a file layout and a set 
 | D34 | (v5) Word colors: a palette of 12 distinguishable colors, cycling after 12 words. Beyond 12 the color is not unique, and hover (D8) remains the reliable channel. Color is never the only channel: hover highlight and the query ring do not depend on it | Default (OQ-15) |
 | D35 | (v5) Keyboard: Enter submits in both boxes, Tab reaches every button, focus is visible. Word chips are focusable so hover-highlight works from the keyboard | Default |
 | D36 | (v5) The suggest dictionary is a fixed list of roughly 1,000 common English words embedded in the explainer. Its source and license are recorded in the sources footer | Default, source open (OQ-14) |
-| D37 | (v5) A `404.html` at the site root with one sentence and a link to the landing, so a mistyped URL is not a dead end either | Default |
+| D37 | Dropped 2026-09-04: no `404.html` in v1. A mistyped URL shows GitHub's default 404 | Dropped |
 | D38 | (v5) Repository: MIT for code, CC BY 4.0 for prose and the allowlist | Default (OQ-16) |
 | D39 | Repo `tech-explainer`, site title "Tech explainer". Explainer URL `<user>.github.io/tech-explainer/bloom-filter/` | Decided |
 
@@ -123,7 +123,7 @@ The check column is the deploy checklist. Run it top to bottom before every push
 | R17 | Every allowlist entry resolves to a real, non-disambiguation Wikipedia article | Run `checks/verify_allowlist.py` on your machine (the sandbox cannot reach Wikipedia). Zero not-ok rows. Commit `checks/allowlist-verified.csv` with the date. Any not-ok entry is deleted from the list before deploy |
 | R18 | (v5) Both pages are keyboard operable and color is never the only channel (D34, D35) | Tab through the explainer with the mouse unplugged: seed, add, check, suggest, reset, every word chip. Enter submits. Focus ring visible. Grayscale the page (devtools rendering, or a screenshot desaturated): a query result is still readable from the ring and the verdict |
 | R19 | (v5) Input limits per D33 in both boxes, and an empty check does nothing | Add a 21-character word: refused with a note. Add "café" and an emoji word: accepted, 3 bulbs. Submit an empty check: nothing changes |
-| R20 | (v5) `404.html` renders on a wrong path and links to the landing | Open `/tech-explainer/nothing-here/` on the live site. One sentence and a working link back |
+| R20 | Dropped with D37 | |
 | R21 | (v5) Reload resets state; nothing is stored | Seed, reload. Strip is dark. Devtools: Application tab shows no cookies, no local or session storage for the origin |
 
 Numbers behind D12, computed for 24 bulbs and 3 hashes from the standard occupancy estimate [2]:
@@ -170,7 +170,7 @@ Decided (D25). Cut from the bottom of this list first:
 4. The origin paragraph.
 5. Distinct colors per word, replaced by one "on" color. This breaks D7 and needs your OK.
 
-(v5) Inserted between 1 and 2: the `404.html` (D37, five minutes, cut first if needed). Never cut: R18 keyboard operability.
+Never cut: R18 keyboard operability. (The 404 page was dropped from scope on 2026-09-04, not cut.)
 
 Never cut: the false positive path (seed, query, suggest), the verdict asymmetry, R12.
 
