@@ -36,12 +36,20 @@ h2{font-size:24px;font-weight:700;margin:0 0 10px}
 sup{font-weight:600}
 .sources{margin-top:38px;border-top:4px solid var(--ink);padding-top:12px;font-size:15px}
 .sources ol{padding-left:22px}.sources li{margin:6px 0}
+
+.page{display:none}.page.cur{display:block}
+.pager{display:flex;justify-content:space-between;align-items:center;margin-top:34px;border-top:4px solid var(--ink);padding-top:16px;gap:12px}
+.pager .where{font-weight:600;color:#333}
+.pager button{min-width:120px}.pager button.hidden{visibility:hidden}
+.links li{margin:8px 0}
+.wire{border:3px dashed #999;padding:12px;margin:12px 0;color:#555;background:#fff}
 @media(max-width:480px){.strip{grid-template-columns:repeat(8,1fr);gap:7px}.panel{padding:14px}.verdict{font-size:20px}}
 </style></head><body>
 <nav><a href="landing.html">Tech explainer</a></nav>
 <h1>Bloom<br>filter</h1>
 <p class="lede">A list that can say "definitely not" or "might be", and nothing else. Add words, then ask about one you never added.</p>
 
+<section class="page" id="playground">
 <div class="panel">
   <div class="row"><input placeholder="add a word" value=""><button class="primary">Add</button><button disabled>Seed 8 words</button><button class="secondary">Reset</button></div>
   <div class="strip" id="strip"></div>
@@ -50,12 +58,34 @@ sup{font-weight:600}
   <div class="verdict" id="verdict">Might be in the set</div>
 </div>
 
-<div class="origin"><h2>Why this exists</h2>
-<p>In 1970 Burton Bloom was looking at a problem where checking a big list was expensive and being occasionally wrong in one direction was survivable. He showed you could shrink the list to a strip of bits if you accepted a small rate of false "yes" answers, and never a false "no".<sup>[1]</sup></p></div>
+</section>
+<section class="page" id="origin"><div class="origin"><h2>Origin story</h2>
+<p>In 1970 Burton Bloom was looking at a problem where checking a big list was expensive and being occasionally wrong in one direction was survivable. He showed you could shrink the list to a strip of bits if you accepted a small rate of false "yes" answers, and never a false "no".<sup>[1]</sup></p>
+<p>His worked example was a hyphenation program: most words follow simple rules, a few thousand need a lookup in a dictionary too big for memory. A small in-memory filter could say "definitely a simple word" for most input and send only the rest to the slow dictionary.<sup>[1]</sup></p></div></section>
+
+<section class="page" id="applications"><h2>Real-world applications</h2>
+<p>The same shape shows up wherever a full lookup is expensive and a wrong "maybe" is cheap to catch.</p>
+<div class="wire">Three systems, each sourced to its own docs on build day (D42, R23). Placeholder text until then:</div>
+<p><b>Databases that write files and never rewrite them</b> keep one filter per file, so a lookup for a key that isn't there skips the disk entirely.<sup>[3]</sup></p>
+<p><b>The Bigtable paper</b> describes the same trick for its tablets, which is where most later systems got it.<sup>[4]</sup></p>
+<p><b>Bitcoin light clients</b> once used filters to ask full nodes only about transactions that might be theirs. It leaked more than intended and was later deprecated, which is its own lesson about "might be".<sup>[5]</sup></p>
+</section>
+
+<section class="page" id="further"><h2>Read further</h2>
+<ol class="links">
+<li><a href="https://doi.org/10.1145/362686.362692">The 1970 paper</a>, four pages, readable.</li>
+<li><a href="#">The 2004 survey by Broder and Mitzenmacher</a>, where the sizing formulas come from.</li>
+<li><a href="https://en.wikipedia.org/wiki/Bloom_filter">Wikipedia's article</a>, for the variants (counting, cuckoo, blocked).</li>
+<li>The three system docs from the previous page.</li>
+</ol>
+</section>
+
+<div class="pager"><button id="prev" class="secondary">Prev</button><span class="where" id="where"></span><button id="next" class="primary">Next</button></div>
 
 <div class="sources"><b>Sources</b><ol>
 <li>Bloom, B. H. (1970). Space/time trade-offs in hash coding with allowable errors. Communications of the ACM 13(7). <a href="https://doi.org/10.1145/362686.362692">doi:10.1145/362686.362692</a></li>
 <li>Broder, A. and Mitzenmacher, M. (2004). Network applications of Bloom filters: a survey. Internet Mathematics 1(4).</li>
+<li class="wire">[3] system docs, verified on build day</li><li class="wire">[4] Chang et al. (2006), Bigtable, OSDI. To confirm.</li><li class="wire">[5] BIP 37 and its deprecation notice. To confirm.</li>
 </ol></div>
 
 <script>
@@ -72,5 +102,16 @@ for(const w of Object.keys(B)){const c=document.createElement('span');c.classNam
  const on=()=>{strip.classList.add('dim');B[w].forEach(i=>bulbs[i].classList.add('hi'));};
  const off=()=>{strip.classList.remove('dim');bulbs.forEach(b=>b.classList.remove('hi'));};
  c.onmouseenter=on;c.onmouseleave=off;c.onfocus=on;c.onblur=off;c.onclick=()=>c.classList.toggle('pin');words.appendChild(c);}
+
+const pages=['playground','origin','applications','further'],names=['Playground','Origin story','Real-world applications','Read further'];
+function show(){let i=pages.indexOf(location.hash.slice(1));if(i<0)i=0;
+ pages.forEach((p,j)=>document.getElementById(p).classList.toggle('cur',j===i));
+ document.getElementById('where').textContent=(i+1)+' of 4: '+names[i];
+ document.getElementById('prev').classList.toggle('hidden',i===0);
+ document.getElementById('next').classList.toggle('hidden',i===3);
+ document.getElementById('prev').onclick=()=>location.hash=pages[i-1];
+ document.getElementById('next').onclick=()=>location.hash=pages[i+1];
+ window.scrollTo(0,0);}
+addEventListener('hashchange',show);show();
 </script>
 </body></html>

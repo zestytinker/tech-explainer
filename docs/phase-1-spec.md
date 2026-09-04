@@ -1,6 +1,6 @@
 # Phase 1 spec: explainers site, Bloom filter first
 
-Status: draft v5.3, checks folder deferred, 2026-09-04. Nothing here is built. Lines added in the audit are marked (v5).
+Status: draft v6, four-page explainer, 2026-09-04. Nothing here is built. Lines added in the audit are marked (v5).
 
 Vocabulary used throughout: **explainer** is one concept's page (v1 has one: Bloom filter). **Playground** is the interactive part of an explainer, the strip of bulbs and its boxes. **Site** is the thing at the GitHub Pages URL that will eventually hold several explainers.
 
@@ -78,7 +78,7 @@ The cheapest form of "scalable" that fits in 2 hours is a file layout and a set 
 | D18 | On touch, tap does what hover does and stays until the next tap | Decided |
 | D19 | Querying a word that is in the set gets the same "Might be" as any other hit. The page never reveals true positives | Decided |
 | D20 | Reset button always visible, no confirm dialog | Decided |
-| D21 | Prose around the playground: one origin paragraph only in v1 | Decided |
+| D21 | Reversed 2026-09-04 by D40. Was: one origin paragraph only | Reversed |
 | D22 | I write the code, single `index.html` per explainer; you name the repo | Decided |
 | D23 | Strip wraps to two rows of 12 below 480 px | Decided |
 | D24 | I pick the 8 seed words, verified by script (R8). You can veto | Decided |
@@ -97,6 +97,10 @@ The cheapest form of "scalable" that fits in 2 hours is a file layout and a set 
 | D37 | Dropped 2026-09-04: no `404.html` in v1. A mistyped URL shows GitHub's default 404 | Dropped |
 | D38 | (v5) Repository: MIT for code, CC BY 4.0 for prose and the allowlist | Default (OQ-16) |
 | D39 | Repo `tech-explainer`, site title "Tech explainer". Explainer URL `<user>.github.io/tech-explainer/bloom-filter/` | Decided |
+| D40 | The explainer is four pages in a fixed order: 1 Playground, 2 Origin story, 3 Real-world applications, 4 Read further. Prev and Next buttons move between them. Page 1 is complete on its own; the reviewer path (R13) never leaves it | Decided |
+| D41 | The four pages are sections of one `index.html`, switched by URL hash (`#origin`, `#applications`, `#further`). Every page is deep-linkable and Prev/Next are instant | Default (OQ-18) |
+| D42 | Page 3 names three systems, each sourced to that system's own documentation or the original paper. Candidates: Apache Cassandra, RocksDB, the Bigtable paper, Bitcoin BIP 37. Chrome Safe Browsing is excluded: its current mechanism is not the one the popular articles describe | Default (OQ-19) |
+| D43 | Page 4 is a short list of links: the 1970 paper, the 2004 survey, the Wikipedia article, and the page 3 sources. Every link is also a source, so R12 covers it | Default |
 
 ## 7. Requirements, each with its check
 
@@ -124,6 +128,8 @@ The check column is the deploy checklist. Run it top to bottom before every push
 | R18 | (v5) Both pages are keyboard operable and color is never the only channel (D34, D35) | Tab through the explainer with the mouse unplugged: seed, add, check, suggest, reset, every word chip. Enter submits. Focus ring visible. Grayscale the page (devtools rendering, or a screenshot desaturated): a query result is still readable from the ring and the verdict |
 | R19 | (v5) Input limits per D33 in both boxes, and an empty check does nothing | Add a 21-character word: refused with a note. Add "café" and an emoji word: accepted, 3 bulbs. Submit an empty check: nothing changes |
 | R20 | Dropped with D37 | |
+| R22 | Prev/Next move through the four pages in order; Prev is absent on page 1 and Next on page 4; the browser back button and a direct link to `#applications` both land on the right page | Click through 1 to 4 and back. Reload on `#origin` shows Origin story. Open `#further` in a fresh tab. Back button returns to the previous page, not out of the site |
+| R23 | Every system named on page 3 links to that system's own documentation or the original paper, and the claim matches what that source says today | On deploy day, open each source and read the sentence that supports the claim. Record the URL and date in the commit message. A claim without a matching sentence is removed |
 | R21 | (v5) Reload resets state; nothing is stored | Seed, reload. Strip is dark. Devtools: Application tab shows no cookies, no local or session storage for the origin |
 
 Numbers behind D12, computed for 24 bulbs and 3 hashes from the standard occupancy estimate [2]:
@@ -155,7 +161,7 @@ This rule applies identically to every future explainer. It is a site rule, not 
 
 Phase 1 is done when all of the following hold on the live GitHub Pages URL:
 
-1. R1 through R21 pass, checked off in `bloom-filter/checks/deploy-checklist.md` with the date.
+1. R1 through R23 pass, checked off in `bloom-filter/checks/deploy-checklist.md` with the date.
 2. One person who has never seen the page (the same session as R13 is fine) hit a false positive, was asked "why did it say might be", and gave an answer that mentions the bulbs already being on from other words. Record their words verbatim in `bloom-filter/checks/reader-test.md`. One failed attempt is logged, not hidden.
 3. Zero factual sentences without a footer number.
 4. Total build time logged and under 2 hours, or the overrun is written down with what was cut.
@@ -166,17 +172,18 @@ Decided (D25). Deferred before the build started, 2026-09-04: the `checks/` fold
 
 Cut from the bottom of this list first:
 
+0. Page 3, Real-world applications (D42). Highest verification cost. If cut, Next goes from Origin story straight to Read further.
 1. The landing's typeahead and dropdown (part of R15). Fall back to a plain list of built names with the same three messages on submit. The not-yet and not-supported states are never cut; a dead end on the front door fails goal 2.
 2. Touch tap-to-highlight (D18). Reviewers on phones lose hover; everything else works.
 3. The suggest button's "add more words first" state. Replace with the button simply doing nothing below 3 words.
-4. The origin paragraph.
+4. The Origin story page.
 5. Distinct colors per word, replaced by one "on" color. This breaks D7 and needs your OK.
 
 Never cut: R18 keyboard operability. (The 404 page was dropped from scope on 2026-09-04, not cut.)
 
 Never cut: the false positive path (seed, query, suggest), the verdict asymmetry, R12.
 
-(v5) Budget note, honest version: explainer about 70 min, landing with typeahead about 25, checks and recordings about 20, deploy about 10. That is 125 minutes against a 120 minute budget before anything goes wrong, so the cut order is expected to be used, not held in reserve.
+(v6) Budget note, honest version: playground page about 70 min, pages 2 to 4 about 40 (20 of it sourcing page 3), landing with typeahead about 25, deploy about 10. That is 145 minutes against 120 before anything goes wrong; item 0 in the cut order is the likely casualty.
 
 ## 11. Open questions
 
@@ -187,6 +194,8 @@ Never cut: the false positive path (seed, query, suggest), the verdict asymmetry
 | OQ-13 | Matching tolerance. Exact after lowercase and trim is cheapest; plurals and aliases are in the list; typo tolerance (one edit) costs another 10 minutes | Lowercase, trim, drop trailing s, aliases. No typo tolerance in v1 |
 | OQ-14 | (v5) Source of the ~1,000 word suggest dictionary. Any word list carries a license and the footer has to say so | I pick a permissively licensed common-words list and record it. Veto |
 | OQ-15 | (v5) 24 words but only about 12 colors humans can tell apart. Cycle after 12, or lower the word cap to 12, which would also reopen D11 | Cycle after 12, keep the cap |
+| OQ-18 | Page switching: hash sections in one file (instant, one file, deep-linkable) or four HTML files (works with JS off, four files to keep in step) | Hash sections in one file |
+| OQ-19 | Which three systems on page 3 | Cassandra, RocksDB, Bigtable paper. BIP 37 as a fourth only if time allows, as the "and sometimes it gets removed" example |
 | OQ-16 | (v5) Repo license. MIT for code and CC BY 4.0 for prose and allowlist is the usual pair | As stated |
 | OQ-17 | Closed 2026-09-04: repo is `tech-explainer`, site title "Tech explainer", URL `<user>.github.io/tech-explainer/`. Now D39 | |
 
