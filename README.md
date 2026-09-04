@@ -10,4 +10,6 @@ Status: built, awaiting the live checks (see docs/phase-1-spec.md section 11b). 
 - `content/allowlist.py`: the ~200 concept allowlist for the landing search. `allowlist.json` is generated from it and committed.
 - `checks/verify_allowlist.py`: dev check that every allowlist entry is a real Wikipedia article. Run on a machine with network access; commit the CSV it writes.
 
+Type is Fredoka, embedded under the SIL Open Font License; see `font/OFL.txt`.
+
 Rule for the whole project: nothing is shown as finished without its check, and nothing factual is published without its source.

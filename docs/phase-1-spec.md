@@ -1,6 +1,6 @@
 # Phase 1 spec: explainers site, Bloom filter first
 
-Status: v7.1, repainted, 2026-09-04. Build ran 22:46 to 23:03 by commit timestamps (about 17 minutes of wall clock after the go; content and sourcing were done ahead). Nothing cut from the cut order. Nothing here is built. Lines added in the audit are marked (v5).
+Status: v7.2, type and shapes, 2026-09-04. Build ran 22:46 to 23:03 by commit timestamps (about 17 minutes of wall clock after the go; content and sourcing were done ahead). Nothing cut from the cut order. Nothing here is built. Lines added in the audit are marked (v5).
 
 Vocabulary used throughout: **explainer** is one concept's page (v1 has one: Bloom filter). **Playground** is the interactive part of an explainer, the strip of bulbs and its boxes. **Site** is the thing at the GitHub Pages URL that will eventually hold several explainers.
 
@@ -99,6 +99,8 @@ The cheapest form of "scalable" that fits in 2 hours is a file layout and a set 
 | D39 | Repo `tech-explainer`, site title "Tech explainer". Explainer URL `<user>.github.io/tech-explainer/bloom-filter/` | Decided |
 | D40 | The explainer is five pages in a fixed order: 1 Why (hook story), 2 How (playground), 3 Origin story, 4 Real-world applications, 5 Read further. Prev and Next move between them; on page 1 the Next button reads "Next: build it". The playground page is complete on its own; the reviewer path (R13) is one click from page 1, then never leaves page 2. Revised 2026-09-04 from four pages | Decided |
 | D46 | Palette per section 11a. Repaint 2026-09-04 | Decided |
+| D48 | Type is Fredoka (SIL OFL), subsetted to Latin, weights 400–600, embedded as base64 woff2 in each page. No CDN, no external request, works with the network off. `font/OFL.txt` is in the repo and both pages credit it. Explainer 71 KB, landing 45 KB, both inside the 150 KB budget | Decided |
+| D49 | Shapes: borders 2 px (was 3–4), shadows 4 px (was 6), corners rounded (10 px controls, 14–16 px panels, pill chips), bulbs are circles. Ink softened to #3D372F, typed input to #4A433A, dropdown to #FFFDF6. Title sits on one line | Decided |
 | D47 | Each verdict carries a one-line reason naming the bulbs, not the words. Softens D7 | Default, veto to revert |
 | D45 | Five step buttons sit under the title on every page, labelled "1. Why", "2. How", "3. Origin story", "4. Real-world applications", "5. Read further". The current page is filled black. Each jumps to its page; Prev/Next at the bottom stay. Below 480 px only the current button shows its name, the rest show their number, so the playground stays above the fold (R1). Added at build, veto if you want full labels on phones | Decided (phone variant Default) |
 | D44 | The hook story is a hypothetical (a signup form on an unnamed site), so it carries no factual claim and no source. Text is in `content/bloom-filter-pages.md` | Decided |
@@ -209,8 +211,9 @@ OQ-1 through OQ-10 were accepted at their defaults on 2026-09-04 and are now Dec
 
 | Token | Value | Where it may appear |
 |---|---|---|
-| ink | #2B2721 | All structure and type. Warm dark, never pure black |
-| ink-soft | #5C5548 | Secondary type: notes, sources, pager label |
+| ink | #3D372F | All structure and type. Soft warm dark, never pure black |
+| ink-soft | #6B6355 | Secondary type: notes, sources, pager label |
+| ink-field | #4A433A | Text the reader types, softer than structure |
 | butter | #FFEFB8 | Page ground, nothing else |
 | paper | #FDFAF1 | Panels, buttons, dropdown. White (#fff) for text fields only |
 | bulb | #FFC93C | Exactly one button per visible page: the next thing worth doing |
