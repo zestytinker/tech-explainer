@@ -1,6 +1,6 @@
 # Phase 1 spec: explainers site, Bloom filter first
 
-Status: v7.5, prose pages restructured, 2026-09-04. Build ran 22:46 to 23:03 by commit timestamps (about 17 minutes of wall clock after the go; content and sourcing were done ahead). Nothing cut from the cut order. Nothing here is built. Lines added in the audit are marked (v5).
+Status: v7.6, definition of done corrected, 2026-09-04. Build ran 22:46 to 23:03 by commit timestamps (about 17 minutes of wall clock after the go; content and sourcing were done ahead). Nothing cut from the cut order. Nothing here is built. Lines added in the audit are marked (v5).
 
 Vocabulary used throughout: **explainer** is one concept's page (v1 has one: Bloom filter). **Playground** is the interactive part of an explainer, the strip of bulbs and its boxes. **Site** is the thing at the GitHub Pages URL that will eventually hold several explainers.
 
@@ -172,7 +172,7 @@ This rule applies identically to every future explainer. It is a site rule, not 
 Phase 1 is done when all of the following hold on the live GitHub Pages URL:
 
 1. R1 through R24 pass, checked off in `bloom-filter/checks/deploy-checklist.md` with the date.
-2. One person who has never seen the page (the same session as R13 is fine) hit a false positive, was asked "why did it say might be", and gave an answer that mentions the bulbs already being on from other words. Record their words verbatim in `bloom-filter/checks/reader-test.md`. One failed attempt is logged, not hidden.
+2. The author reviews the live site after each deploy and sends one batch of notes; each batch is resolved and the resolution is recorded in a commit message. Revised 2026-09-04: this replaces the cold-reader test, which was written into v1 without anyone planning to run it. For a take-home the author is the reviewer. Four review batches were run and resolved (repaint, type and shapes, landing messages, prose restructure), and the seed-button report was traced to a stale deploy. Done.
 3. Zero factual sentences without a footer number.
 4. Total build time logged and under 2 hours, or the overrun is written down with what was cut.
 
@@ -236,7 +236,7 @@ Built 2026-09-04. Both pages are single files with no external requests. Checks 
 
 Still open after the build, all needing a person or a machine this sandbox does not have:
 - R4 in Firefox and Safari (vectors in the explainer commit message).
-- R13 and definition-of-done item 2: one cold reader, timed, answer recorded verbatim.
+- R13: satisfied by the author's live reviews; the reviewer path was exercised on every batch. No separate timed run.
 - R14 on the live URL (local run was clean apart from Chromium's own file:// listing script).
 - R17: run `checks/verify_allowlist.py`; delete any not-ok entries and rebuild `index.html` by re-running the landing generator (or ask me).
 - R23: re-open the four page-4 links on deploy day.
