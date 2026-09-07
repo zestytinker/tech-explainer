@@ -3,7 +3,6 @@
 A fun tooling for explaining hard tech concepts.
 
 **Live:** https://zestytinker.github.io/tech-explainer/
-**First explainer:** https://zestytinker.github.io/tech-explainer/bloom-filter/
 
 ## What this is
 
@@ -15,31 +14,6 @@ Two rules the whole project runs on:
 
 - Nothing is shown as finished without its check. Every requirement in [the spec](docs/phase-1-spec.md) is paired with a check, and the results of each run are written into the commit that made the change.
 - Nothing factual is published without its source. Every claim on a page carries a numbered link to a primary source. Claims that could not be sourced were removed, not softened.
-
-## How to play with it
-
-**The landing.** A single box. Type a concept and press Enter. Every answer is decided on your device against a fixed list of 207 tech concepts baked into the page; nothing you type is sent anywhere, and the page works with the network off. Three things can happen:
-
-- a built concept (`bloom filter`, or its plural, or an alias) opens its explainer;
-- a concept on the list without an explainer yet says so plainly and offers what does exist;
-- anything else says it isn't supported and offers the same.
-
-No input can leave you stuck, which is the point.
-
-**The explainer.** Five pages, moved through with the step buttons under the title or Prev/Next at the bottom.
-
-1. **Why** — the hook: a signup form that says "taken" faster than any real list could be searched.
-2. **How** — the playground. This is the part to actually use:
-   - Press **Seed 8 words**. Eight words go in, and each lights three bulbs on a strip of 24.
-   - Press **Suggest a word**. It picks a word that was never added but whose three bulbs happen to all be lit already.
-   - Press **Check**. It says *Might be in the set*. That is a false positive, and you caused it.
-   - Now hover (or tap) the word chips. Each lights the three bulbs it set. Find the words that lit the three bulbs your query checked. That is the whole idea: the filter never stored a single word, only which bulbs are on, so it cannot tell your word's bulbs from anyone else's.
-   - Type a word of your own and check it. When it says *Definitely not*, the message names a bulb that was dark. A dark bulb is proof, because nothing ever lit it.
-   - Keep adding words and watch the strip fill. By fifteen words most made-up words come back *Might be*; by twenty-four almost everything does. That is the trade being made, not a bug.
-   - The single yellow button is always the next thing worth doing.
-3. **Origin story** — Burton Bloom, 1970, and the hyphenation problem that produced the idea.
-4. **Real-world applications** — Cassandra, RocksDB, the Bigtable paper, and Bitcoin's cautionary version.
-5. **Read further** — the paper, the survey, the docs.
 
 ## Repository
 
