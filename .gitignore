@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 .DS_Store
 checks/allowlist-verified.csv.tmp
+docs/reviewer-notes.md
+docs/video-script.md
+*.bundle
+private/
