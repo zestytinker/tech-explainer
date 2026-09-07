@@ -1,6 +1,6 @@
 # Tech explainer
 
-Build a tiny version of a hard tech idea, then break it.
+A fun tooling for explaining hard tech concepts.
 
 **Live:** https://zestytinker.github.io/tech-explainer/
 **First explainer:** https://zestytinker.github.io/tech-explainer/bloom-filter/
@@ -74,24 +74,19 @@ python3 checks/verify_allowlist.py
 
 It writes `checks/allowlist-verified.csv`. Any entry that comes back missing or as a disambiguation page is deleted from `content/allowlist.py`, not explained away.
 
-## Adding a second explainer
-
-By design this costs one folder and one line. Give the concept a path in `content/allowlist.py`, add `<concept>/index.html`, done. Nothing in the existing explainer needs editing, and the landing picks it up automatically. Keep the five-page skeleton and the numbered sources footer so the checks stay reusable.
-
 ## Ideas to extend
 
-Rough order of value, with the honest cost of each.
+- **Let readers request a concept.**
+  An unsupported search could become a signal instead of a dead end: count how many different readers ask for each concept, and when an unsupported one becomes popular, build it and add it to the bank.
 
-**Let readers request a concept.** Today an unsupported search is a dead end with a polite message. It could be a signal instead: a "request this" button that records what people actually want, feeding the queue for what to build next. The catch is that this is the first thing here that needs a backend, or at least a form service, and with it come spam, moderation, and a privacy promise that currently reads "nothing you type is sent anywhere". That sentence would have to change, and it should change loudly rather than quietly.
+- **Check whether a concept suits the format.**
+  Not every idea has a tiny breakable version. An LLM pass at authoring time could ask what the reader would build and what breaking it looks like, and refuse the rest. A judgment call, so it belongs in the pipeline with a human deciding, never at runtime.
 
-**Check whether a concept suits this format at all.** Not every idea has a tiny breakable version. A Bloom filter does; "eventual consistency" might not. Before a concept enters the queue, an LLM pass could ask whether there is a playground in it, what the reader would build, and what breaking it would look like, and refuse the ones with no good answer. This is a judgment call, so it belongs in the authoring pipeline with a human deciding, not at runtime in front of a reader.
+- **Use an LLM to police the facts rule, not to write the facts.**
+  Claims already carry a source and a supporting sentence, so CI can fetch each source and flag drift. The LLM is the auditor, never the author; a generated claim with a generated citation is the exact failure the rule exists to prevent.
 
-**Use an LLM to police the facts rule, not to write the facts.** Each page's claims already carry a source and the supporting sentence. That structure is machine-checkable: fetch each source, ask whether it still supports the claim, and flag drift. This is most valuable for the "used by system X" claims, which go stale silently, and it would run as scheduled CI rather than in the browser. Worth stating plainly: the LLM would be the auditor, never the author. A generated claim with a generated citation is exactly the failure mode the facts rule exists to prevent, so any such pipeline needs a human sign-off before publish and a record of what was checked and when.
+- **Data cleaning and cache popular knowledge.**
+  Once the pipeline opens Wikipedia and a few other trusted data sources, it could clean the pages (ignoring advertisements and irrelevant blocks) so it reads the main content of the popular pages more efficiently, and cache that in a database of our own, so fact checks and authoring do not depend on a third party being up or unchanged. The natural next step is a small knowledge graph over those pages, concept to concept, refreshed on a schedule so drift shows up as a diff rather than a surprise.
 
-**Cache popular concepts.** If explainers are ever produced with help from a model, the expensive part is the drafting and the sourcing, not the serving. Those outputs are static once verified, so they should be generated once, reviewed, committed as plain HTML, and served from the CDN like everything else here. The cache is the repository. That keeps the current property worth protecting: a reader gets bytes, not an inference call, and the page behaves identically offline and forever.
-
-**Smaller things.** A third message on the landing for ambiguous prefixes like "hash", which today falls to "not supported" (open question OQ-20 in the spec). A size control on the filter, so the reader can watch false positives disappear as the strip grows. And the reader test that has not been run yet, which is the only thing that will actually tell us whether the bulbs teach what they are supposed to teach.
-
-## Status
-
-Built and deployed. Five checks still need a human or a machine this repo has not had access to, listed in section 11b of the spec: the hash vectors in Firefox and Safari, the timed reader test, the console on the live URL, the Wikipedia pass over the allowlist, and re-opening the page 4 links on deploy day.
+- **Enable further customization.**
+  Make the number of bulbs adjustable, and the scrambles per word (how many bulbs each word lights), for readers who want to go further. Growing the strip shows false positives fading; adding scrambles shows the strip filling faster. Both are fixed today on purpose, so the first visit stays one idea.
