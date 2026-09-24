@@ -8,7 +8,7 @@ A fun tooling for explaining hard tech concepts.
 
 Most explanations of a hard idea hand you a definition and hope it sticks. This site does the opposite: you build a working, tiny version of the thing in a few clicks, then break it on purpose and work out why it broke. The Bloom filter is the first concept, chosen because it fails in a specific, visible way that a reader can cause themselves in about twenty seconds.
 
-Two audiences. A curious generalist with a little software knowledge, who will never read the paper. And a reviewer who opens a URL, clicks around for a minute, and forms a judgment.
+Who is the audience: A curious generalist with a little software knowledge, who will never read the paper.
 
 Two rules the whole project runs on:
 
